@@ -1,0 +1,33 @@
+Name:                vty-ui-builder-xml
+Version:             0.1
+Synopsis:            XML input document reader for vty-ui-builder
+Description:         Provides an XML input document reader for
+                     vty-ui-builder, which means it reads XML files
+                     and converts them to the AST required by
+                     vty-ui-builder's source generation mechanisms.
+License:             BSD3
+License-file:        LICENSE
+Author:              Jonathan Daugherty <drcygnus@gmail.com>
+Maintainer:          Jonathan Daugherty <drcygnus@gmail.com>
+Category:            Graphics
+Build-type:          Simple
+Cabal-version:       >=1.6
+
+Data-files:
+  README
+
+Source-Repository head
+  type:     git
+  location: https://github.com/jtdaugherty/vty-ui-builder-xml
+
+Library
+  Hs-Source-Dirs:    src
+  GHC-Options:       -Wall
+  Build-Depends:
+    vty-ui-builder >= 0.1 && < 0.2,
+    HaXml >= 1.22 && < 1.23,
+    base >= 4 && < 5,
+    haskell98
+
+  Exposed-modules:
+    Graphics.Vty.Widgets.Builder.Reader.XML
