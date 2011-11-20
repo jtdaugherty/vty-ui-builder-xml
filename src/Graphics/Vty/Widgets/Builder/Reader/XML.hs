@@ -3,8 +3,6 @@ module Graphics.Vty.Widgets.Builder.Reader.XML
     )
 where
 
-import Data.List (isSuffixOf)
-
 import Text.XML.HaXml.Parse
 import Text.XML.HaXml.Types
 import Text.XML.HaXml.Posn
@@ -16,8 +14,7 @@ import Graphics.Vty.Widgets.Builder.Reader.XML.Builder
 -- import Graphics.Vty.Widgets.Builder.Reader.XML.Validate
 
 xmlReader :: DocumentReader
-xmlReader = DocumentReader { checkFormat = checkXmlFormat
-                           , readDoc = xmlReadDoc
+xmlReader = DocumentReader { readDoc = xmlReadDoc
                            }
 
 parseAndValidate :: FilePath -> IO (Either [String] (Element Posn))
@@ -38,9 +35,6 @@ xmlReadDoc path = do
   case parsed of
     Left es -> return $ Left es
     Right e ->
-        case buildDoc e of
+        case buildDoc (CElem e noLoc) of
           Error err -> return $ Left [err]
           Parsed doc -> return $ Right doc
-
-checkXmlFormat :: FilePath -> IO Bool
-checkXmlFormat = return . (".xml" `isSuffixOf`)
