@@ -16,9 +16,9 @@ import Graphics.Vty.Widgets.Builder.Reader.XML.Types
 toSourceLocation :: Posn -> SourceLocation
 toSourceLocation p =
     SourceLocation { srcFile = posnFilename p
-                     , srcLine = posnLine p
-                     , srcColumn = posnColumn p
-                     }
+                   , srcLine = posnLine p
+                   , srcColumn = posnColumn p
+                   }
 
 shortName :: QName -> String
 shortName (N s) = s
