@@ -6,6 +6,7 @@ where
 import Text.XML.HaXml.Parse
 import Text.XML.HaXml.Types
 import Text.XML.HaXml.Posn
+import Text.XML.HaXml.Combinators (tag)
 
 import qualified Graphics.Vty.Widgets.Builder.AST as A
 import Graphics.Vty.Widgets.Builder.Reader
@@ -17,24 +18,29 @@ xmlReader :: DocumentReader
 xmlReader = DocumentReader { readDoc = xmlReadDoc
                            }
 
-parseAndValidate :: FilePath -> IO (Either [String] (Element Posn))
+parseAndValidate :: FilePath -> IO (Either [(String, A.SourceLocation)] (Element Posn))
 parseAndValidate inputXmlPath = do
   xmlContents <- readFile inputXmlPath
   case xmlParse' inputXmlPath xmlContents of
-    Left e -> return $ Left ["Error parsing input XML "
-                             ++ (show inputXmlPath) ++ ": " ++ e]
+    Left e -> return $ Left [ ("Error parsing input XML "
+                               ++ (show inputXmlPath) ++ ": " ++ e
+                              , A.noLoc)
+                            ]
     Right (Document _ _ e _) -> return $ Right e
          -- result <- validate e
          -- case result of
          --   [] -> return $ Right e
          --   es -> return $ Left es
 
-xmlReadDoc :: FilePath -> IO (Either [String] A.Doc)
+xmlReadDoc :: FilePath -> IO (Either [(String, A.SourceLocation)] A.Doc)
 xmlReadDoc path = do
   parsed <- parseAndValidate path
   case parsed of
     Left es -> return $ Left es
     Right e ->
-        case buildDoc (CElem e noLoc) of
-          Error err -> return $ Left [err]
-          Parsed doc -> return $ Right doc
+        case tag "collection" (CElem e noPos) of
+          [] -> return $ Left [("Root element expected to be 'collection'", A.noLoc)]
+          [e'] -> case docFromXml e' of
+                   ParseError err p -> return $ Left [(err, toSourceLocation p)]
+                   Parsed doc -> return $ Right doc
+          _ -> error "cannot happen"

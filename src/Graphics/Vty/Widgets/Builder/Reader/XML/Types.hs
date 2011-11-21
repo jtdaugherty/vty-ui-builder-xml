@@ -22,23 +22,28 @@ type ValidateM a = State ValidationState a
 type ElementValidator = Element Posn -> ValidateM ()
 
 data XMLParse a = Parsed a
-                | Error String
+                | ParseError String Posn
 
 instance Monad XMLParse where
     (Parsed val) >>= f = f val
-    (Error s) >>= _ = Error s
+    (ParseError s p) >>= _ = ParseError s p
     (Parsed _) >> (Parsed val) = Parsed val
-    (Parsed _) >> (Error s) = Error s
-    (Error s) >> _ = Error s
-    fail = Error
+    (Parsed _) >> (ParseError s p) = ParseError s p
+    (ParseError s p) >> _ = ParseError s p
+    fail = flip ParseError noPos
     return = Parsed
 
 instance Functor XMLParse where
-    fmap _ (Error s) = Error s
+    fmap _ (ParseError s p) = ParseError s p
     fmap f (Parsed a) = Parsed (f a)
 
 instance Applicative XMLParse where
     pure = Parsed
     (Parsed f) <*> (Parsed val) = Parsed $ f val
-    (Error s) <*> _ = Error s
-    _ <*> (Error s) = Error s
+    (ParseError s p) <*> _ = ParseError s p
+    _ <*> (ParseError s p) = ParseError s p
+
+instance Alternative XMLParse where
+    empty = ParseError "Nothing parsed" noPos
+    (ParseError _ _) <|> b = b
+    (Parsed a) <|> _ = Parsed a
