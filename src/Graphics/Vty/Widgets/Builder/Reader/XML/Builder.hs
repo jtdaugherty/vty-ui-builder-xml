@@ -8,6 +8,7 @@ import Control.Applicative
 
 import Text.XML.HaXml.Types hiding (Reference)
 import Text.XML.HaXml.Posn
+import Text.XML.HaXml.Namespaces (printableName)
 import Text.XML.HaXml.Combinators
 
 import Graphics.Vty.Widgets.Builder.AST
@@ -44,9 +45,6 @@ reqAttr (CElem (Elem eName attrs _) posn) nam =
 reqAttr _ _ =
     error "BUG: reqAttr called on non-element content!"
 
-optAttr :: Content Posn -> String -> XMLParse (Maybe String)
-optAttr e attrName = (Just <$> reqAttr e attrName) <|> (return Nothing)
-
 docFromXml :: Content Posn -> XMLParse Doc
 docFromXml e =
     Doc <$> parseInterfaces e
@@ -60,17 +58,23 @@ parseInterfaces =
         where
           parseInterface e =
               case childrenBy elm e of
-                [ui, fg] ->
-                    Interface <$> reqAttr e "name"
-                                  <*> parseWidgetLike ui
-                                  <*> parseFocusGroup fg
-                                  <*> pure (toSourceLocation $ info e)
-                _ -> ParseError "Element must have two child elements" (info e)
+                [ui, fg] -> mkInterface e ui $ Just fg
+                [ui] -> mkInterface e ui Nothing
+                _ -> ParseError "Element must have exactly one or two child elements" (info e)
 
-          parseFocusGroup e =
-              mapM parseFocusEntry $ childrenBy (tag "entry") e
+          mkInterface :: Content Posn -> Content Posn
+                      -> Maybe (Content Posn) -> XMLParse Interface
+          mkInterface e ui fg =
+              Interface <$> reqAttr e "name"
+                            <*> parseWidgetLike ui
+                            <*> maybe (pure []) parseFocusGroup fg
+                            <*> pure (toSourceLocation $ info e)
 
-          parseFocusEntry e = reqAttr e "name"
+          parseFocusGroup =
+              expect "focusGroup" $ mapM parseFocusEntry . childrenBy elm
+
+          parseFocusEntry =
+              expect "entry" $ \e -> reqAttr e "name"
 
 -- Looks for a 'params' child element of the specified element.  If
 -- one is not found, returns empty list.
@@ -94,7 +98,7 @@ parseShared e =
 parseWidgetSpec :: Content Posn -> XMLParse WidgetSpec
 parseWidgetSpec e@(CElem elmt@(Elem nam _ _) posn) =
     WidgetSpec (shortName nam)
-                   <$> optAttr e "id"
+                   <$> (optional $ reqAttr e "id")
                    <*> attrValues elmt posn
                    <*> specContents elmt
                    <*> pure (toSourceLocation posn)
@@ -118,8 +122,26 @@ parseWidgetLike e = (Ref <$> parseReference e) <|>
                     (Widget <$> parseWidgetSpec e)
 
 parseReference :: Content Posn -> XMLParse Reference
-parseReference e =
-    Reference <$> reqAttr e "name" <*> (pure $ toSourceLocation $ info e)
+parseReference =
+    expect "ref" $ \r ->
+        Reference <$> reqAttr r "target" <*> (pure $ toSourceLocation $ info r)
+
+elemName :: Content Posn -> String
+elemName (CElem (Elem nam _ _) _) = printableName nam
+elemName _ = "(non-element content)"
+
+expect :: String -> (Content Posn -> XMLParse a) -> Content Posn -> XMLParse a
+expect nam f =
+    \e -> let msg = concat [ "Element '"
+                           , nam
+                           , "' expected, element '"
+                           , elemName e
+                           , "' found instead"
+                           ]
+          in case tag nam e of
+            [] -> ParseError msg (info e)
+            [r] -> f r
+            _ -> error "BUG: tag should have returned at most one result"
 
 -- Looks for 'import' children element of the specified element.  If
 -- one is not found, returns empty list.
