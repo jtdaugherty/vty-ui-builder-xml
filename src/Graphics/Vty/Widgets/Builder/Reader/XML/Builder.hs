@@ -118,7 +118,8 @@ parseWidgetLike e = (Ref <$> parseReference e) <|>
                     (Widget <$> parseWidgetSpec e)
 
 parseReference :: Content Posn -> XMLParse Reference
-parseReference e = Reference <$> reqAttr e "name"
+parseReference e =
+    Reference <$> reqAttr e "name" <*> (pure $ toSourceLocation $ info e)
 
 -- Looks for 'import' children element of the specified element.  If
 -- one is not found, returns empty list.
