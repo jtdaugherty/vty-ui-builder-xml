@@ -6,6 +6,7 @@ where
 import Text.XML.HaXml.Parse
 import Text.XML.HaXml.Types
 import Text.XML.HaXml.Posn
+import Text.XML.HaXml.Namespaces
 import Text.XML.HaXml.Combinators (tag)
 
 import qualified Graphics.Vty.Widgets.Builder.AST as A
@@ -26,11 +27,9 @@ parseAndValidate inputXmlPath = do
                                ++ (show inputXmlPath) ++ ": " ++ e
                               , A.noLoc)
                             ]
-    Right (Document _ _ e _) -> return $ Right e
-         -- result <- validate e
-         -- case result of
-         --   [] -> return $ Right e
-         --   es -> return $ Left es
+    Right d -> do
+      let (Document _ _ e _) = resolveAllNames qualify d
+      return $ Right e
 
 xmlReadDoc :: FilePath -> IO (Either [(String, A.SourceLocation)] A.Doc)
 xmlReadDoc path = do

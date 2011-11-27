@@ -1,62 +1,65 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<collection>
+<collection xmlns:c="http://codevine.org/vty-ui-builder/xmlns/core/1.0"
+            xmlns:d="http://codevine.org/vty-ui-builder/xmlns/data/1.0"
+            xmlns:w="http://codevine.org/vty-ui-builder/xmlns/widget/1.0"
+            xmlns="http://codevine.org/vty-ui-builder/xmlns/core/1.0">
   <!-- Introduction -->
   <interface name="intro">
-    <vBox>
-      <fText>vty-ui-builder demo: Introduction</fText>
-      <hBorder/>
-      <format name="wrap">
-        <fText>
+    <w:vBox>
+      <w:fText>vty-ui-builder demo: Introduction</w:fText>
+      <w:hBorder/>
+      <w:format name="wrap">
+        <w:fText>
           This program will demonstrate the major features of the
-          <attr fg="cyan">vty-ui-builder</attr> tool.  This program
+          <d:attr fg="cyan">vty-ui-builder</d:attr> tool.  This program
           will take you through a series of interfaces which have been
           expressed in the vty-ui-builder input XML
-          format.<br/><br/>The tool will generate a Haskell module
+          format.<d:br/><d:br/>The tool will generate a Haskell module
           with a default 'main' function which will set up key event
           handlers for each interface to allow you to evaluate each
-          one as you are building your XML document.<br/><br/>Press
-          the <attr fg="magenta">'n'</attr> key whenever you want to
-          change to the next demonstration interface (or <attr
-          fg="magenta">'p'</attr> to go to the previous one).  In
-          interfaces with multiple interactive widgets, press <attr
-          fg="magenta">Tab</attr> to cycle focus between them.
-        </fText>
-      </format>
-    </vBox>
+          one as you are building your XML document.<d:br/><d:br/>Press
+          the <d:attr fg="magenta">'n'</d:attr> key whenever you want to
+          change to the next demonstration interface (or <d:attr
+          fg="magenta">'p'</d:attr> to go to the previous one).  In
+          interfaces with multiple interactive widgets, press <d:attr
+          fg="magenta">Tab</d:attr> to cycle focus between them.
+        </w:fText>
+      </w:format>
+    </w:vBox>
   </interface>
 
   <!-- bordered.dtd -->
   <interface name="bordered">
-    <vBox>
-      <fText><attr fg="green">bordered</attr> demo</fText>
-      <hBorder/>
-      <bordered>
-        <fText>This text has an ASCII art border around it.</fText>
-      </bordered>
-      <hBox>
-        <fText>Here is a vertical border:</fText>
-        <vBorder/>
-      </hBox>
-      <vBox>
-        <fText>Here is a horizontal border:</fText>
-        <hBorder/>
-      </vBox>
-    </vBox>
+    <w:vBox>
+      <w:fText><d:attr fg="green">bordered</d:attr> demo</w:fText>
+      <w:hBorder/>
+      <w:bordered>
+        <w:fText>This text has an ASCII art border around it.</w:fText>
+      </w:bordered>
+      <w:hBox>
+        <w:fText>Here is a vertical border:</w:fText>
+        <w:vBorder/>
+      </w:hBox>
+      <w:vBox>
+        <w:fText>Here is a horizontal border:</w:fText>
+        <w:hBorder/>
+      </w:vBox>
+    </w:vBox>
   </interface>
 
   <!-- button.dtd -->
   <interface name="button">
-    <vBox id="button">
-      <fText><attr fg="green">button</attr> demo</fText>
-      <hBorder/>
-      <fText>Press <attr fg="yellow">TAB</attr> to switch focus from
-      one button to the next.</fText>
-      <hBox>
-        <button id="b1" label="Button 1"/>
-        <button id="b2" label="Button 2"/>
-        <button id="b3" label="Button 3"/>
-      </hBox>
-    </vBox>
+    <w:vBox id="button">
+      <w:fText><d:attr fg="green">button</d:attr> demo</w:fText>
+      <w:hBorder/>
+      <w:fText>Press <d:attr fg="yellow">TAB</d:attr> to switch focus from
+      one button to the next.</w:fText>
+      <w:hBox>
+        <w:button id="b1" label="Button 1"/>
+        <w:button id="b2" label="Button 2"/>
+        <w:button id="b3" label="Button 3"/>
+      </w:hBox>
+    </w:vBox>
     <focusGroup>
       <entry name="b1"/>
       <entry name="b2"/>
@@ -66,49 +69,49 @@
 
   <!-- centered.dtd -->
   <interface name="centered">
-    <vBox>
-      <fText><attr fg="green">centered</attr> demo</fText>
-      <hBorder/>
-      <hBox>
-        <hCentered>
-          <fText>This text is horizontally centered <br/>using the <attr
-          fg="green">hCentered</attr> tag.</fText>
-        </hCentered>
-        <vBorder/>
-        <vCentered>
-          <fText>This text is vertically centered <br/>using the <attr
-          fg="green">vCentered</attr> tag.</fText>
-        </vCentered>
-      </hBox>
-      <hBorder/>
-      <centered>
-        <fText>This text is both vertically and horizontally centered
-        using the <attr fg="green">centered</attr> tag.</fText>
-      </centered>
-    </vBox>
+    <w:vBox>
+      <w:fText><d:attr fg="green">centered</d:attr> demo</w:fText>
+      <w:hBorder/>
+      <w:hBox>
+        <w:hCentered>
+          <w:fText>This text is horizontally centered <d:br/>using the <d:attr
+          fg="green">hCentered</d:attr> tag.</w:fText>
+        </w:hCentered>
+        <w:vBorder/>
+        <w:vCentered>
+          <w:fText>This text is vertically centered <d:br/>using the <d:attr
+          fg="green">vCentered</d:attr> tag.</w:fText>
+        </w:vCentered>
+      </w:hBox>
+      <w:hBorder/>
+      <w:centered>
+        <w:fText>This text is both vertically and horizontally centered
+        using the <d:attr fg="green">centered</d:attr> tag.</w:fText>
+      </w:centered>
+    </w:vBox>
   </interface>
 
   <!-- checkBox.dtd -->
   <interface name="checkbox">
-    <vBox>
-      <fText><attr fg="green">checkBox</attr> demo</fText>
-      <hBorder/>
-      <format name="wrap">
-        <fText>Checkboxes can be toggled by pressing the spacebar.</fText>
-      </format>
-      <checkBox id="cb1" label="Breakfast"/>
-      <checkBox id="cb2" label="Lunch"/>
-      <checkBox id="cb3" label="Dinner"/>
-      <format name="wrap">
-        <fText>
+    <w:vBox>
+      <w:fText><d:attr fg="green">checkBox</d:attr> demo</w:fText>
+      <w:hBorder/>
+      <w:format name="wrap">
+        <w:fText>Checkboxes can be toggled by pressing the spacebar.</w:fText>
+      </w:format>
+      <w:checkBox id="cb1" label="Breakfast"/>
+      <w:checkBox id="cb2" label="Lunch"/>
+      <w:checkBox id="cb3" label="Dinner"/>
+      <w:format name="wrap">
+        <w:fText>
           Checkboxes can also be used as radio buttons by setting a
-          <attr fg="magenta">radioGroup</attr> XML attribute to the
+          <d:attr fg="magenta">radioGroup</d:attr> XML attribute to the
           name of a desired radio button group.
-        </fText>
-      </format>
-      <checkBox id="cb4" label="Cake" radioGroup="rg1" />
-      <checkBox id="cb5" label="Death" radioGroup="rg1" />
-    </vBox>
+        </w:fText>
+      </w:format>
+      <w:checkBox id="cb4" label="Cake" radioGroup="rg1" />
+      <w:checkBox id="cb5" label="Death" radioGroup="rg1" />
+    </w:vBox>
     <focusGroup>
       <entry name="cb1"/>
       <entry name="cb2"/>
@@ -120,17 +123,17 @@
 
   <!-- dialog.dtd -->
   <interface name="dialog">
-    <vBox>
-      <fText><attr fg="green">dialog</attr> demo</fText>
-      <hBorder/>
-      <dialog id="dlg1" title="Testing Dialog">
-        <format name="wrap">
-          <fText>This is the content of the dialog.  The dialog can
+    <w:vBox>
+      <w:fText><d:attr fg="green">dialog</d:attr> demo</w:fText>
+      <w:hBorder/>
+      <w:dialog id="dlg1" title="Testing Dialog">
+        <w:format name="wrap">
+          <w:fText>This is the content of the dialog.  The dialog can
           have arbitrary content widgets (even interactive
-          widgets).</fText>
-        </format>
-      </dialog>
-    </vBox>
+          widgets).</w:fText>
+        </w:format>
+      </w:dialog>
+    </w:vBox>
     <focusGroup>
       <entry name="dlg1"/>
     </focusGroup>
@@ -138,16 +141,16 @@
 
   <!-- dirBrowser.dtd -->
   <interface name="dirbrowser">
-    <vBox>
-      <fText><attr fg="green">dirBrowser</attr> demo</fText>
-      <hBorder/>
-      <format name="wrap">
-        <fText>This is a directory browser widget.  Arrow keys can be
+    <w:vBox>
+      <w:fText><d:attr fg="green">dirBrowser</d:attr> demo</w:fText>
+      <w:hBorder/>
+      <w:format name="wrap">
+        <w:fText>This is a directory browser widget.  Arrow keys can be
         used to select files or directories, and Enter will enter a
-        directory.</fText>
-      </format>
-      <dirBrowser id="db1"/>
-    </vBox>
+        directory.</w:fText>
+      </w:format>
+      <w:dirBrowser id="db1"/>
+    </w:vBox>
     <focusGroup>
       <entry name="db1"/>
     </focusGroup>
@@ -155,18 +158,18 @@
 
   <!-- edit.dtd -->
   <interface name="edit">
-    <vBox>
-      <fText><attr fg="green">edit</attr> demo</fText>
-      <hBorder/>
-      <format name="wrap">
-        <fText>This is an edit widget.  Edit widgets support
+    <w:vBox>
+      <w:fText><d:attr fg="green">edit</d:attr> demo</w:fText>
+      <w:hBorder/>
+      <w:format name="wrap">
+        <w:fText>This is an edit widget.  Edit widgets support
         relatively standard Emacs-style line-editing
-        keystrokes.</fText>
-      </format>
-      <bordered>
-        <edit id="e1"/>
-      </bordered>
-    </vBox>
+        keystrokes.</w:fText>
+      </w:format>
+      <w:bordered>
+        <w:edit id="e1"/>
+      </w:bordered>
+    </w:vBox>
     <focusGroup>
       <entry name="e1"/>
     </focusGroup>
@@ -174,376 +177,376 @@
 
   <!-- fText.dtd -->
   <interface name="fText">
-    <vBox>
-      <fText><attr fg="green">fText</attr> demo</fText>
-      <hBorder/>
+    <w:vBox>
+      <w:fText><d:attr fg="green">fText</d:attr> demo</w:fText>
+      <w:hBorder/>
 
-      <vBox>
-        <fText>This is some <attr fg="cyan">cyan</attr> text.</fText>
-        <format name="wrap">
-          <fText>
-            This is some text which has been modified with the <attr
-            fg="green">wrap</attr> formatter.  If your terminal is
+      <w:vBox>
+        <w:fText>This is some <d:attr fg="cyan">cyan</d:attr> text.</w:fText>
+        <w:format name="wrap">
+          <w:fText>
+            This is some text which has been modified with the <d:attr
+            fg="green">wrap</d:attr> formatter.  If your terminal is
             sufficiently narrow, this text will be wrapped
-            automatically!  The <attr fg="red">attr</attr> tag can be
-            used to apply <attr bg="green" fg="black">different
-            attributes</attr> to <attr fg="yellow">text</attr>.  A
-            <attr fg="magenta">'br'</attr> tag introduces a line
+            automatically!  The <d:attr fg="red">attr</d:attr> tag can be
+            used to apply <d:attr bg="green" fg="black">different
+            attributes</d:attr> to <d:attr fg="yellow">text</d:attr>.  A
+            <d:attr fg="magenta">'br'</d:attr> tag introduces a line
             break.
-          </fText>
-        </format>
-      </vBox>
-    </vBox>
+          </w:fText>
+        </w:format>
+      </w:vBox>
+    </w:vBox>
   </interface>
 
   <!-- hBox-sized.dtd -->
   <!-- hBox.dtd -->
   <interface name="hbox">
-    <vBox>
-      <fText><attr fg="green">hBox</attr> / <attr fg="green">hBox-sized</attr> demo</fText>
-      <hBorder/>
-      <bordered>
-        <hBox>
-          <format name="wrap">
-            <fText>
+    <w:vBox>
+      <w:fText><d:attr fg="green">hBox</d:attr> / <d:attr fg="green">hBox-sized</d:attr> demo</w:fText>
+      <w:hBorder/>
+      <w:bordered>
+        <w:hBox>
+          <w:format name="wrap">
+            <w:fText>
               hBox elements can contain two or more elements.
-            </fText>
-          </format>
-          <bordered>
-            <format name="wrap">
-              <fText>
+            </w:fText>
+          </w:format>
+          <w:bordered>
+            <w:format name="wrap">
+              <w:fText>
                 They will be laid out horizontally.
-              </fText>
-            </format>
-          </bordered>
-        </hBox>
-      </bordered>
-      <bordered>
-        <hBox spacing="2">
-          <format name="wrap">
-            <fText>
+              </w:fText>
+            </w:format>
+          </w:bordered>
+        </w:hBox>
+      </w:bordered>
+      <w:bordered>
+        <w:hBox spacing="2">
+          <w:format name="wrap">
+            <w:fText>
               hBox elements can specify spacing between child widgets.
-            </fText>
-          </format>
-          <format name="wrap">
-            <fText>
+            </w:fText>
+          </w:format>
+          <w:format name="wrap">
+            <w:fText>
               Spacing for hBoxes is in columns.
-            </fText>
-          </format>
-        </hBox>
-      </bordered>
-      <format name="wrap">
-        <fText>
-          The <attr fg="green">hBox-sized</attr> tag is used to exert
+            </w:fText>
+          </w:format>
+        </w:hBox>
+      </w:bordered>
+      <w:format name="wrap">
+        <w:fText>
+          The <d:attr fg="green">hBox-sized</d:attr> tag is used to exert
           control over the size policy of box children.  This tag
           supports only two children.  Try resizing your terminal to
           see how these boxes behave.
-        </fText>
-      </format>
-      <bordered>
-        <hBox-sized first="20" second="30">
-          <fText>20 columns</fText>
-          <fText>30 columns</fText>
-        </hBox-sized>
-      </bordered>
-      <bordered>
-        <hBox-sized percent="25">
-          <fText>25%</fText>
-          <fText>75%</fText>
-        </hBox-sized>
-      </bordered>
-    </vBox>
+        </w:fText>
+      </w:format>
+      <w:bordered>
+        <w:hBox-sized first="20" second="30">
+          <w:fText>20 columns</w:fText>
+          <w:fText>30 columns</w:fText>
+        </w:hBox-sized>
+      </w:bordered>
+      <w:bordered>
+        <w:hBox-sized percent="25">
+          <w:fText>25%</w:fText>
+          <w:fText>75%</w:fText>
+        </w:hBox-sized>
+      </w:bordered>
+    </w:vBox>
   </interface>
 
   <!-- hFill.dtd -->
   <!-- vFill.dtd -->
   <interface name="fills">
-    <vBox>
-      <fText><attr fg="green">hFill</attr> / <attr fg="green">vFill</attr> demo</fText>
-      <hBorder/>
-      <bordered>
-        <hBox>
-          <fText>This is a horizontal fill,<br/>given a height and fill character:</fText>
-          <hFill height="2" char="X"/>
-        </hBox>
-      </bordered>
-      <bordered>
-        <hBox>
-          <fText>This is a vertical fill,<br/>given a fill character:</fText>
-          <vFill char="X"/>
-        </hBox>
-      </bordered>
-    </vBox>
+    <w:vBox>
+      <w:fText><d:attr fg="green">hFill</d:attr> / <d:attr fg="green">vFill</d:attr> demo</w:fText>
+      <w:hBorder/>
+      <w:bordered>
+        <w:hBox>
+          <w:fText>This is a horizontal fill,<d:br/>given a height and fill character:</w:fText>
+          <w:hFill height="2" char="X"/>
+        </w:hBox>
+      </w:bordered>
+      <w:bordered>
+        <w:hBox>
+          <w:fText>This is a vertical fill,<d:br/>given a fill character:</w:fText>
+          <w:vFill char="X"/>
+        </w:hBox>
+      </w:bordered>
+    </w:vBox>
   </interface>
 
   <!-- vLimit.dtd -->
   <!-- hLimit.dtd -->
   <!-- boxLimit.dtd -->
   <interface name="limits">
-    <vBox>
-      <fText><attr fg="green">hLimit</attr> / <attr fg="green">vLimit</attr> demo</fText>
-      <hBorder/>
-      <format name="wrap">
-        <fText>
+    <w:vBox>
+      <w:fText><d:attr fg="green">hLimit</d:attr> / <d:attr fg="green">vLimit</d:attr> demo</w:fText>
+      <w:hBorder/>
+      <w:format name="wrap">
+        <w:fText>
           Widgets which ordinarily consume all available space can be
           constricted with a "limit" widget.  Limit widgets place an
-          <attr fg="yellow">upper bound</attr> on the limited
+          <d:attr fg="yellow">upper bound</d:attr> on the limited
           dimension of a widget.  To generate a limit widget, use
-          <attr fg="magenta">vLimit</attr> (vertical limiting), <attr
-          fg="magenta">hLimit</attr> (horizontal limiting), or <attr
-          fg="magenta">boxLimit</attr> (both).
-        </fText>
-      </format>
-      <vLimit height="5">
-        <bordered>
-          <vBox>
-            <format name="wrap">
-              <fText>
+          <d:attr fg="magenta">vLimit</d:attr> (vertical limiting), <d:attr
+          fg="magenta">hLimit</d:attr> (horizontal limiting), or <d:attr
+          fg="magenta">boxLimit</d:attr> (both).
+        </w:fText>
+      </w:format>
+      <w:vLimit height="5">
+        <w:bordered>
+          <w:vBox>
+            <w:format name="wrap">
+              <w:fText>
                 This bordered box is constrained to 5 rows in height
                 (2 rows are used by the borders).  The amount required
                 by the text will depend on the width of your terminal.
-              </fText>
-            </format>
-            <vFill char=" "/>
-          </vBox>
-        </bordered>
-      </vLimit>
-      <hLimit width="30">
-        <bordered>
-          <hBox>
-            <format name="wrap">
-              <fText>
+              </w:fText>
+            </w:format>
+            <w:vFill char=" "/>
+          </w:vBox>
+        </w:bordered>
+      </w:vLimit>
+      <w:hLimit width="30">
+        <w:bordered>
+          <w:hBox>
+            <w:format name="wrap">
+              <w:fText>
                 This bordered box is constrained to 30 columns in
                 width (2 columns are used by the borders).
-              </fText>
-            </format>
-            <hFill char=" " height="1"/>
-          </hBox>
-        </bordered>
-      </hLimit>
-      <boxLimit height="10" width="25">
-        <bordered>
-          <hBox>
-            <format name="wrap">
-              <fText>
+              </w:fText>
+            </w:format>
+            <w:hFill char=" " height="1"/>
+          </w:hBox>
+        </w:bordered>
+      </w:hLimit>
+      <w:boxLimit height="10" width="25">
+        <w:bordered>
+          <w:hBox>
+            <w:format name="wrap">
+              <w:fText>
                 This bordered box is constrained to 25 columns in
                 width (2 columns are used by the borders) and 10 rows
                 in height (2 rows are used by the borders).
-              </fText>
-            </format>
-            <hFill char=" " height="1"/>
-          </hBox>
-        </bordered>
-      </boxLimit>
-    </vBox>
+              </w:fText>
+            </w:format>
+            <w:hFill char=" " height="1"/>
+          </w:hBox>
+        </w:bordered>
+      </w:boxLimit>
+    </w:vBox>
   </interface>
 
   <!-- vFixed.dtd -->
   <!-- hFixed.dtd -->
   <!-- boxFixed.dtd -->
   <interface name="fixed">
-    <vBox>
-      <fText><attr fg="green">hFixed</attr> / <attr fg="green">vFixed</attr> demo</fText>
-      <hBorder/>
-      <format name="wrap">
-        <fText>
+    <w:vBox>
+      <w:fText><d:attr fg="green">hFixed</d:attr> / <d:attr fg="green">vFixed</d:attr> demo</w:fText>
+      <w:hBorder/>
+      <w:format name="wrap">
+        <w:fText>
           The size of a widget on the screen can be set to a specific
           value using a "fixed-size" widget.  Fixed-size widgets place
           a constraint on the dimension of a widget.  If the widget's
           actual size is less than the constraint, it is padded so
           that the space is always consumed.  To generate a fixed-size
-          widget, use <attr fg="magenta">vFixed</attr> (vertical fixed
-          size), <attr fg="magenta">hFixed</attr> (horizontal fixed
-          size), or <attr fg="magenta">boxFixed</attr>
-          (both).<br/><br/>Fixed-size widgets are similar to "limit"
+          widget, use <d:attr fg="magenta">vFixed</d:attr> (vertical fixed
+          size), <d:attr fg="magenta">hFixed</d:attr> (horizontal fixed
+          size), or <d:attr fg="magenta">boxFixed</d:attr>
+          (both).<d:br/><d:br/>Fixed-size widgets are similar to "limit"
           widgets but guarantee that the size of the fixed widget will
           always remain constant, whereas limit widgets guarantee only
           an upper bound on size.
-        </fText>
-      </format>
-      <bordered>
-        <vFixed height="5">
-          <format name="wrap">
-            <fText>
+        </w:fText>
+      </w:format>
+      <w:bordered>
+        <w:vFixed height="5">
+          <w:format name="wrap">
+            <w:fText>
               This text is set to 5 rows in height.
-            </fText>
-          </format>
-        </vFixed>
-      </bordered>
-      <bordered>
-        <hLimit width="30">
-          <format name="wrap">
-            <fText>
+            </w:fText>
+          </w:format>
+        </w:vFixed>
+      </w:bordered>
+      <w:bordered>
+        <w:hLimit width="30">
+          <w:format name="wrap">
+            <w:fText>
               This text is set to 30 columns in width.
-            </fText>
-          </format>
-        </hLimit>
-      </bordered>
-      <bordered>
-        <boxFixed height="10" width="25">
-          <format name="wrap">
-            <fText>
+            </w:fText>
+          </w:format>
+        </w:hLimit>
+      </w:bordered>
+      <w:bordered>
+        <w:boxFixed height="10" width="25">
+          <w:format name="wrap">
+            <w:fText>
               This text is set to 25 columns in width (2 columns are
               used by the borders) and 10 rows in height (2 rows are
               used by the borders).
-            </fText>
-          </format>
-        </boxFixed>
-      </bordered>
-    </vBox>
+            </w:fText>
+          </w:format>
+        </w:boxFixed>
+      </w:bordered>
+    </w:vBox>
   </interface>
 
   <!-- pad.dtd -->
   <interface name="pad">
-    <vBox>
-      <fText><attr fg="green">pad</attr> demo</fText>
-      <hBorder/>
-      <format name="wrap">
-        <fText id="padt1">
+    <w:vBox>
+      <w:fText><d:attr fg="green">pad</d:attr> demo</w:fText>
+      <w:hBorder/>
+      <w:format name="wrap">
+        <w:fText id="padt1">
           Padding elements can specify one or more padding attributes
           to pad a child widget.  Multiple padding attribute values
           will be combined.
-        </fText>
-      </format>
-      <hBox>
-        <vBox>
-          <bordered>
-            <pad left="2">
-              <fText>Padded on <attr fg="cyan">left</attr></fText>
-            </pad>
-          </bordered>
-          <bordered>
-            <pad right="2">
-              <fText>Padded on <attr fg="cyan">right</attr></fText>
-            </pad>
-          </bordered>
-          <bordered>
-            <pad top="2">
-              <fText>Padded on <attr fg="cyan">top</attr></fText>
-            </pad>
-          </bordered>
-          <bordered>
-            <pad bottom="2">
-              <fText>Padded on <attr fg="cyan">bottom</attr></fText>
-            </pad>
-          </bordered>
-        </vBox>
-        <vBox>
-          <bordered>
-            <pad topBottom="2">
-              <fText>Padded on top and bottom (<attr fg="cyan">topBottom</attr>)</fText>
-            </pad>
-          </bordered>
-          <bordered>
-            <pad leftRight="2">
-              <fText>Padded on left and right (<attr fg="cyan">leftRight</attr>)</fText>
-            </pad>
-          </bordered>
-          <bordered>
-            <pad all="2">
-              <fText>Padded on <attr fg="cyan">all</attr> sides</fText>
-            </pad>
-          </bordered>
-        </vBox>
-      </hBox>
-    </vBox>
+        </w:fText>
+      </w:format>
+      <w:hBox>
+        <w:vBox>
+          <w:bordered>
+            <w:pad left="2">
+              <w:fText>Padded on <d:attr fg="cyan">left</d:attr></w:fText>
+            </w:pad>
+          </w:bordered>
+          <w:bordered>
+            <w:pad right="2">
+              <w:fText>Padded on <d:attr fg="cyan">right</d:attr></w:fText>
+            </w:pad>
+          </w:bordered>
+          <w:bordered>
+            <w:pad top="2">
+              <w:fText>Padded on <d:attr fg="cyan">top</d:attr></w:fText>
+            </w:pad>
+          </w:bordered>
+          <w:bordered>
+            <w:pad bottom="2">
+              <w:fText>Padded on <d:attr fg="cyan">bottom</d:attr></w:fText>
+            </w:pad>
+          </w:bordered>
+        </w:vBox>
+        <w:vBox>
+          <w:bordered>
+            <w:pad topBottom="2">
+              <w:fText>Padded on top and bottom (<d:attr fg="cyan">topBottom</d:attr>)</w:fText>
+            </w:pad>
+          </w:bordered>
+          <w:bordered>
+            <w:pad leftRight="2">
+              <w:fText>Padded on left and right (<d:attr fg="cyan">leftRight</d:attr>)</w:fText>
+            </w:pad>
+          </w:bordered>
+          <w:bordered>
+            <w:pad all="2">
+              <w:fText>Padded on <d:attr fg="cyan">all</d:attr> sides</w:fText>
+            </w:pad>
+          </w:bordered>
+        </w:vBox>
+      </w:hBox>
+    </w:vBox>
   </interface>
 
   <!-- progressBar.dtd -->
   <interface name="progressbar">
-    <vBox>
-      <fText><attr fg="green">progressBar</attr> demo</fText>
-      <hBorder/>
-      <format name="wrap">
-        <fText>
+    <w:vBox>
+      <w:fText><d:attr fg="green">progressBar</d:attr> demo</w:fText>
+      <w:hBorder/>
+      <w:format name="wrap">
+        <w:fText>
           Progress bars use background colors to show progress and
           automatically scale as you resize your terminal.
-        </fText>
-      </format>
-      <bordered>
-        <vBox>
-          <fText>Below is a progress bar at zero percent.</fText>
-          <progressBar completeColor="blue" incompleteColor="white" />
-        </vBox>
-      </bordered>
-      <bordered>
-        <vBox>
-          <fText>Below is a progress bar at 50 percent.</fText>
-          <progressBar progress="50" completeColor="blue" incompleteColor="white" />
-        </vBox>
-      </bordered>
-      <bordered>
-        <vBox>
-          <fText>Below is a progress bar at 75 percent.</fText>
-          <progressBar progress="75" completeColor="blue" incompleteColor="white" />
-        </vBox>
-      </bordered>
-    </vBox>
+        </w:fText>
+      </w:format>
+      <w:bordered>
+        <w:vBox>
+          <w:fText>Below is a progress bar at zero percent.</w:fText>
+          <w:progressBar completeColor="blue" incompleteColor="white" />
+        </w:vBox>
+      </w:bordered>
+      <w:bordered>
+        <w:vBox>
+          <w:fText>Below is a progress bar at 50 percent.</w:fText>
+          <w:progressBar progress="50" completeColor="blue" incompleteColor="white" />
+        </w:vBox>
+      </w:bordered>
+      <w:bordered>
+        <w:vBox>
+          <w:fText>Below is a progress bar at 75 percent.</w:fText>
+          <w:progressBar progress="75" completeColor="blue" incompleteColor="white" />
+        </w:vBox>
+      </w:bordered>
+    </w:vBox>
   </interface>
 
   <!-- ref.dtd -->
   <interface name="ref">
-    <vBox>
-      <fText><attr fg="green">ref</attr> demo</fText>
-      <hBorder/>
-      <format name="wrap">
-        <fText>
+    <w:vBox>
+      <w:fText><d:attr fg="green">ref</d:attr> demo</w:fText>
+      <w:hBorder/>
+      <w:format name="wrap">
+        <w:fText>
           The 'ref' element makes it possible to reference an existing
           widget in more than one place in a document.  In particular,
           this can be used to share widgets between interfaces.
-        </fText>
-      </format>
-      <bordered id="theWidget">
-        <format name="wrap">
-          <fText>This box is the referenced widget, but it is only defined once in the document.</fText>
-        </format>
-      </bordered>
+        </w:fText>
+      </w:format>
+      <w:bordered id="theWidget">
+        <w:format name="wrap">
+          <w:fText>This box is the referenced widget, but it is only defined once in the document.</w:fText>
+        </w:format>
+      </w:bordered>
       <ref target="theWidget"/>
       <ref target="theWidget"/>
-    </vBox>
+    </w:vBox>
   </interface>
 
   <!-- shared.dtd -->
 
   <!-- stringList.dtd -->
   <interface name="stringlist">
-    <vBox>
-      <fText><attr fg="green">stringList</attr> demo</fText>
-      <hBorder/>
-      <format name="wrap">
-        <fText>
-          A <attr fg="magenta">stringList</attr> element generates a
+    <w:vBox>
+      <w:fText><d:attr fg="green">stringList</d:attr> demo</w:fText>
+      <w:hBorder/>
+      <w:format name="wrap">
+        <w:fText>
+          A <d:attr fg="magenta">stringList</d:attr> element generates a
           List widget with String as its key type and FormattedText as
           its widget type.  The XML attributes of the stringList
           element set the visual attributes of the list's cursor when
           the list does not have the focus.
-        </fText>
-      </format>
-      <hBorder/>
-      <bordered id="theList">
-        <stringList cursorFg="black" cursorBg="yellow">
-          <str>Foo</str>
-          <str>Bar</str>
-          <str>Baz</str>
-          <str>Stuff</str>
-          <str>Things</str>
-        </stringList>
-      </bordered>
-      <format name="wrap">
-        <fText>
+        </w:fText>
+      </w:format>
+      <w:hBorder/>
+      <w:bordered id="theList">
+        <w:stringList cursorFg="black" cursorBg="yellow">
+          <d:str>Foo</d:str>
+          <d:str>Bar</d:str>
+          <d:str>Baz</d:str>
+          <d:str>Stuff</d:str>
+          <d:str>Things</d:str>
+        </w:stringList>
+      </w:bordered>
+      <w:format name="wrap">
+        <w:fText>
           If you want to generate a more general List widget, use the
-          <attr fg="magenta">list</attr> tag instead, which allows you
+          <d:attr fg="magenta">list</d:attr> tag instead, which allows you
           to specify the key and widget types for the list.  Below is
           such a list, although because it is generic on the types of
           its keys and widgets, we can't populate the list from the
           XML.  In practice, you would populate it from your
           application code.
-        </fText>
-      </format>
-      <bordered>
-        <list id="customList" cursorFg="black" cursorBg="yellow" keyType="Int" elemType="FormattedText" />
-      </bordered>
-    </vBox>
+        </w:fText>
+      </w:format>
+      <w:bordered>
+        <w:list id="customList" cursorFg="black" cursorBg="yellow" keyType="Int" elemType="FormattedText" />
+      </w:bordered>
+    </w:vBox>
     <focusGroup>
       <entry name="theList" />
       <entry name="customList" />
@@ -553,60 +556,60 @@
   <!-- vBox-sized.dtd -->
   <!-- vBox.dtd -->
   <interface name="vbox">
-    <vBox>
-      <fText><attr fg="green">vBox</attr> / <attr fg="green">vBox-sized</attr> demo</fText>
-      <hBorder/>
-      <bordered>
-        <vBox>
-          <format name="wrap">
-            <fText>
+    <w:vBox>
+      <w:fText><d:attr fg="green">vBox</d:attr> / <d:attr fg="green">vBox-sized</d:attr> demo</w:fText>
+      <w:hBorder/>
+      <w:bordered>
+        <w:vBox>
+          <w:format name="wrap">
+            <w:fText>
               vBox elements can contain two or more elements.
-            </fText>
-          </format>
-          <bordered>
-            <format name="wrap">
-              <fText>
+            </w:fText>
+          </w:format>
+          <w:bordered>
+            <w:format name="wrap">
+              <w:fText>
                 They will be laid out vertically.
-              </fText>
-            </format>
-          </bordered>
-        </vBox>
-      </bordered>
-      <bordered>
-        <vBox spacing="2">
-          <format name="wrap">
-            <fText>
+              </w:fText>
+            </w:format>
+          </w:bordered>
+        </w:vBox>
+      </w:bordered>
+      <w:bordered>
+        <w:vBox spacing="2">
+          <w:format name="wrap">
+            <w:fText>
               vBox elements can specify spacing between child widgets.
-            </fText>
-          </format>
-          <format name="wrap">
-            <fText>
+            </w:fText>
+          </w:format>
+          <w:format name="wrap">
+            <w:fText>
               Spacing for vBoxes is in rows.
-            </fText>
-          </format>
-        </vBox>
-      </bordered>
-      <format name="wrap">
-        <fText>
-          The <attr fg="green">vBox-sized</attr> tag is used to exert
+            </w:fText>
+          </w:format>
+        </w:vBox>
+      </w:bordered>
+      <w:format name="wrap">
+        <w:fText>
+          The <d:attr fg="green">vBox-sized</d:attr> tag is used to exert
           control over the size policy of box children.  This tag
           supports only two children.  Try resizing your terminal to
           see how these boxes behave.
-        </fText>
-      </format>
-      <bordered>
-        <vBox-sized first="3" second="7">
-          <fText>3 rows</fText>
-          <fText>7 rows</fText>
-        </vBox-sized>
-      </bordered>
-      <bordered>
-        <vBox-sized percent="25">
-          <fText>25%</fText>
-          <fText>75%</fText>
-        </vBox-sized>
-      </bordered>
-    </vBox>
+        </w:fText>
+      </w:format>
+      <w:bordered>
+        <w:vBox-sized first="3" second="7">
+          <w:fText>3 rows</w:fText>
+          <w:fText>7 rows</w:fText>
+        </w:vBox-sized>
+      </w:bordered>
+      <w:bordered>
+        <w:vBox-sized percent="25">
+          <w:fText>25%</w:fText>
+          <w:fText>75%</w:fText>
+        </w:vBox-sized>
+      </w:bordered>
+    </w:vBox>
   </interface>
 
 </collection>

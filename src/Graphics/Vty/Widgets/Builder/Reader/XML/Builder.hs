@@ -9,10 +9,11 @@ import Control.Applicative
 import Text.XML.HaXml.Types hiding (Reference)
 import Text.XML.HaXml.Posn
 import Text.XML.HaXml.Namespaces (printableName)
-import Text.XML.HaXml.Combinators
+import Text.XML.HaXml.Combinators hiding (tag)
 
 import qualified Graphics.Vty.Widgets.Builder.AST as A
 import Graphics.Vty.Widgets.Builder.Reader.XML.Types
+import Graphics.Vty.Widgets.Builder.Reader.XML.Namespaces
 
 toSourceLocation :: Posn -> A.SourceLocation
 toSourceLocation p =
@@ -24,6 +25,14 @@ toSourceLocation p =
 shortName :: QName -> String
 shortName (N s) = s
 shortName (QN _ s) = s
+
+type NSURI = String
+type ShortName = String
+
+tag :: NSURI -> ShortName -> CFilter i
+tag ns nam el@(CElem (Elem (QN actualNs n) _ _) _)
+    | nsURI actualNs == ns && n == nam = [el]
+tag _ _ _ = []
 
 reqAttr :: Content Posn -> String -> XMLParse String
 reqAttr (CElem (Elem eName attrs _) posn) nam =
@@ -54,7 +63,7 @@ docFromXml e =
 
 parseInterfaces :: Content Posn -> XMLParse [A.Interface]
 parseInterfaces =
-    mapM parseInterface . childrenBy (tag "interface")
+    mapM parseInterface . childrenBy (tag coreNS "interface")
         where
           parseInterface e =
               case childrenBy elm e of
@@ -71,18 +80,18 @@ parseInterfaces =
                    <*> pure (toSourceLocation $ info e)
 
           parseFocusGroup =
-              expect "focusGroup" $ mapM parseFocusEntry . childrenBy elm
+              expect coreNS "focusGroup" $ mapM parseFocusEntry . childrenBy elm
 
           parseFocusEntry =
-              expect "entry" $ \e -> reqAttr e "name"
+              expect coreNS "entry" $ \e -> reqAttr e "name"
 
 -- Looks for a 'params' child element of the specified element.  If
 -- one is not found, returns empty list.
 parseParams :: Content Posn -> XMLParse [A.Param]
 parseParams e =
-    concat <$> (mapM parseParams' $ childrenBy (tag "params") e)
+    concat <$> (mapM parseParams' $ childrenBy (tag coreNS "params") e)
         where
-          parseParams' = mapM parseParam . childrenBy (tag "param")
+          parseParams' = mapM parseParam . childrenBy (tag coreNS "param")
           parseParam p = A.Param <$> reqAttr p "name"
                          <*> reqAttr p "type"
                          <*> pure (toSourceLocation $ info p)
@@ -91,17 +100,32 @@ parseParams e =
 -- one is not found, returns empty list.
 parseShared :: Content Posn -> XMLParse [A.WidgetSpec]
 parseShared e =
-    concat <$> (mapM parseShared' $ childrenBy (tag "shared") e)
+    concat <$> (mapM parseShared' $ childrenBy (tag coreNS "shared") e)
         where
           parseShared' = mapM parseWidgetSpec . childrenBy elm
 
+elemNS :: Content Posn -> NSURI -> XMLParse ()
+elemNS (CElem (Elem (N _) _ _) posn) ns =
+    ParseError ("Expected element in namespace " ++ show ns ++
+                ", got unqualified element") posn
+elemNS (CElem (Elem (QN actualNs _) _ _) posn) ns =
+    if ns == nsURI actualNs
+    then return ()
+    else ParseError ("Expected element in namespace " ++ show ns ++
+                     ", got element in namespace " ++
+                     (show $ nsURI actualNs)) posn
+elemNS c ns =
+    ParseError ("Expected element in namespace " ++ show ns ++
+                ", got non-element content") (info c)
+
 parseWidgetSpec :: Content Posn -> XMLParse A.WidgetSpec
 parseWidgetSpec e@(CElem elmt@(Elem nam _ _) posn) =
-    A.WidgetSpec (shortName nam)
+    elemNS e widgetNS *>
+    (A.WidgetSpec (shortName nam)
          <$> (optional $ reqAttr e "id")
          <*> attrValues elmt posn
          <*> specContents elmt
-         <*> pure (toSourceLocation posn)
+         <*> pure (toSourceLocation posn))
 parseWidgetSpec c =
     ParseError "Content expected to be a child element" (info c)
 
@@ -112,10 +136,29 @@ attrValues e@(Elem _ attrs _) posn =
 specContents :: Element Posn -> XMLParse [A.WidgetSpecContent]
 specContents (Elem _ _ cs) = mapM parseSpecContent cs
     where
-      parseSpecContent e@(CElem _ _) = A.ChildWidgetLike <$> parseWidgetLike e
+      parseSpecContent e@(CElem _ _) = (A.ChildWidgetLike <$> parseWidgetLike e)
+                                       <|> (A.ChildElement <$> parseChildElement e)
       parseSpecContent (CString _ s posn) = return $ A.Text s (toSourceLocation posn)
       parseSpecContent c =
           ParseError "Content must be child element or string" (info c)
+
+elemContents :: Element Posn -> XMLParse [A.ElementContent]
+elemContents (Elem _ _ cs) = mapM parseSpecContent cs
+    where
+      parseSpecContent e@(CElem _ _) = A.ElemChild <$> parseChildElement e
+      parseSpecContent (CString _ s posn) = return $ A.ElemText s (toSourceLocation posn)
+      parseSpecContent c =
+          ParseError "Content must be child element or string" (info c)
+
+parseChildElement :: Content Posn -> XMLParse A.Element
+parseChildElement e@(CElem e2@(Elem n _ _) posn) =
+    elemNS e dataNS *>
+    (A.Element (shortName n)
+          <$> attrValues e2 posn
+          <*> elemContents e2
+          <*> (pure $ toSourceLocation posn))
+parseChildElement c =
+    ParseError "Expected element, got non-element content" (info c)
 
 parseWidgetLike :: Content Posn -> XMLParse A.WidgetLike
 parseWidgetLike e = (A.Ref <$> parseReference e) <|>
@@ -123,22 +166,26 @@ parseWidgetLike e = (A.Ref <$> parseReference e) <|>
 
 parseReference :: Content Posn -> XMLParse A.Reference
 parseReference =
-    expect "ref" $ \r ->
+    expect coreNS "ref" $ \r ->
         A.Reference <$> reqAttr r "target" <*> (pure $ toSourceLocation $ info r)
 
 elemName :: Content Posn -> String
 elemName (CElem (Elem nam _ _) _) = printableName nam
 elemName _ = "(non-element content)"
 
-expect :: String -> (Content Posn -> XMLParse a) -> Content Posn -> XMLParse a
-expect nam f =
+expect :: NSURI
+       -> String
+       -> (Content Posn -> XMLParse a)
+       -> Content Posn
+       -> XMLParse a
+expect ns nam f =
     \e -> let msg = concat [ "Element '"
                            , nam
                            , "' expected, element '"
                            , elemName e
                            , "' found instead"
                            ]
-          in case tag nam e of
+          in case tag ns nam e of
             [] -> ParseError msg (info e)
             [r] -> f r
             _ -> error "BUG: tag should have returned at most one result"
@@ -148,6 +195,6 @@ expect nam f =
 parseImports :: Content Posn -> XMLParse [A.ModuleImport]
 parseImports e =
     -- Find an "imports" child and map parseImport over its children
-    mapM parseImport $ childrenBy (tag "import") e
+    mapM parseImport $ childrenBy (tag coreNS "import") e
         where
           parseImport i = A.ModuleImport <$> reqAttr i "name"

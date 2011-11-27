@@ -36,3 +36,4 @@ Library
     Graphics.Vty.Widgets.Builder.Reader.XML.Types
     Graphics.Vty.Widgets.Builder.Reader.XML.Validate
     Graphics.Vty.Widgets.Builder.Reader.XML.Builder
+    Graphics.Vty.Widgets.Builder.Reader.XML.Namespaces
