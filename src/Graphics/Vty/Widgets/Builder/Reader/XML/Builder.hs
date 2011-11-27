@@ -83,7 +83,10 @@ parseInterfaces =
               expect coreNS "focusGroup" $ mapM parseFocusEntry . childrenBy elm
 
           parseFocusEntry =
-              expect coreNS "entry" $ \e -> reqAttr e "name"
+              expect coreNS "entry" $
+                         \e -> (,)
+                               <$> reqAttr e "name"
+                               <*> (pure $ toSourceLocation $ info e)
 
 -- Looks for a 'params' child element of the specified element.  If
 -- one is not found, returns empty list.
