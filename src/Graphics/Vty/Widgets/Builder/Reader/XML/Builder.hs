@@ -11,15 +11,15 @@ import Text.XML.HaXml.Posn
 import Text.XML.HaXml.Namespaces (printableName)
 import Text.XML.HaXml.Combinators
 
-import Graphics.Vty.Widgets.Builder.AST
+import qualified Graphics.Vty.Widgets.Builder.AST as A
 import Graphics.Vty.Widgets.Builder.Reader.XML.Types
 
-toSourceLocation :: Posn -> SourceLocation
+toSourceLocation :: Posn -> A.SourceLocation
 toSourceLocation p =
-    SourceLocation { srcFile = posnFilename p
-                   , srcLine = posnLine p
-                   , srcColumn = posnColumn p
-                   }
+    A.SourceLocation { A.srcFile = posnFilename p
+                     , A.srcLine = posnLine p
+                     , A.srcColumn = posnColumn p
+                     }
 
 shortName :: QName -> String
 shortName (N s) = s
@@ -45,14 +45,14 @@ reqAttr (CElem (Elem eName attrs _) posn) nam =
 reqAttr _ _ =
     error "BUG: reqAttr called on non-element content!"
 
-docFromXml :: Content Posn -> XMLParse Doc
+docFromXml :: Content Posn -> XMLParse A.Doc
 docFromXml e =
-    Doc <$> parseInterfaces e
-            <*> parseParams e
-            <*> parseShared e
-            <*> parseImports e
+    A.Doc <$> parseInterfaces e
+         <*> parseParams e
+         <*> parseShared e
+         <*> parseImports e
 
-parseInterfaces :: Content Posn -> XMLParse [Interface]
+parseInterfaces :: Content Posn -> XMLParse [A.Interface]
 parseInterfaces =
     mapM parseInterface . childrenBy (tag "interface")
         where
@@ -63,12 +63,12 @@ parseInterfaces =
                 _ -> ParseError "Element must have exactly one or two child elements" (info e)
 
           mkInterface :: Content Posn -> Content Posn
-                      -> Maybe (Content Posn) -> XMLParse Interface
+                      -> Maybe (Content Posn) -> XMLParse A.Interface
           mkInterface e ui fg =
-              Interface <$> reqAttr e "name"
-                            <*> parseWidgetLike ui
-                            <*> maybe (pure []) parseFocusGroup fg
-                            <*> pure (toSourceLocation $ info e)
+              A.Interface <$> reqAttr e "name"
+                   <*> parseWidgetLike ui
+                   <*> maybe (pure []) parseFocusGroup fg
+                   <*> pure (toSourceLocation $ info e)
 
           parseFocusGroup =
               expect "focusGroup" $ mapM parseFocusEntry . childrenBy elm
@@ -78,30 +78,30 @@ parseInterfaces =
 
 -- Looks for a 'params' child element of the specified element.  If
 -- one is not found, returns empty list.
-parseParams :: Content Posn -> XMLParse [Param]
+parseParams :: Content Posn -> XMLParse [A.Param]
 parseParams e =
     concat <$> (mapM parseParams' $ childrenBy (tag "params") e)
         where
           parseParams' = mapM parseParam . childrenBy (tag "param")
-          parseParam p = Param <$> reqAttr p "name"
+          parseParam p = A.Param <$> reqAttr p "name"
                          <*> reqAttr p "type"
                          <*> pure (toSourceLocation $ info p)
 
 -- Looks for a 'shared' child element of the specified element.  If
 -- one is not found, returns empty list.
-parseShared :: Content Posn -> XMLParse [WidgetSpec]
+parseShared :: Content Posn -> XMLParse [A.WidgetSpec]
 parseShared e =
     concat <$> (mapM parseShared' $ childrenBy (tag "shared") e)
         where
           parseShared' = mapM parseWidgetSpec . childrenBy elm
 
-parseWidgetSpec :: Content Posn -> XMLParse WidgetSpec
+parseWidgetSpec :: Content Posn -> XMLParse A.WidgetSpec
 parseWidgetSpec e@(CElem elmt@(Elem nam _ _) posn) =
-    WidgetSpec (shortName nam)
-                   <$> (optional $ reqAttr e "id")
-                   <*> attrValues elmt posn
-                   <*> specContents elmt
-                   <*> pure (toSourceLocation posn)
+    A.WidgetSpec (shortName nam)
+         <$> (optional $ reqAttr e "id")
+         <*> attrValues elmt posn
+         <*> specContents elmt
+         <*> pure (toSourceLocation posn)
 parseWidgetSpec c =
     ParseError "Content expected to be a child element" (info c)
 
@@ -109,22 +109,22 @@ attrValues :: Element Posn -> Posn -> XMLParse [(String, String)]
 attrValues e@(Elem _ attrs _) posn =
     mapM (\k -> (,) k <$> reqAttr (CElem e posn) k) $ map (shortName . fst) attrs
 
-specContents :: Element Posn -> XMLParse [WidgetSpecContent]
+specContents :: Element Posn -> XMLParse [A.WidgetSpecContent]
 specContents (Elem _ _ cs) = mapM parseSpecContent cs
     where
-      parseSpecContent e@(CElem _ _) = Child <$> parseWidgetLike e
-      parseSpecContent (CString _ s posn) = return $ Text s (toSourceLocation posn)
+      parseSpecContent e@(CElem _ _) = A.ChildWidgetLike <$> parseWidgetLike e
+      parseSpecContent (CString _ s posn) = return $ A.Text s (toSourceLocation posn)
       parseSpecContent c =
           ParseError "Content must be child element or string" (info c)
 
-parseWidgetLike :: Content Posn -> XMLParse WidgetLike
-parseWidgetLike e = (Ref <$> parseReference e) <|>
-                    (Widget <$> parseWidgetSpec e)
+parseWidgetLike :: Content Posn -> XMLParse A.WidgetLike
+parseWidgetLike e = (A.Ref <$> parseReference e) <|>
+                    (A.Widget <$> parseWidgetSpec e)
 
-parseReference :: Content Posn -> XMLParse Reference
+parseReference :: Content Posn -> XMLParse A.Reference
 parseReference =
     expect "ref" $ \r ->
-        Reference <$> reqAttr r "target" <*> (pure $ toSourceLocation $ info r)
+        A.Reference <$> reqAttr r "target" <*> (pure $ toSourceLocation $ info r)
 
 elemName :: Content Posn -> String
 elemName (CElem (Elem nam _ _) _) = printableName nam
@@ -145,9 +145,9 @@ expect nam f =
 
 -- Looks for 'import' children element of the specified element.  If
 -- one is not found, returns empty list.
-parseImports :: Content Posn -> XMLParse [ModuleImport]
+parseImports :: Content Posn -> XMLParse [A.ModuleImport]
 parseImports e =
     -- Find an "imports" child and map parseImport over its children
     mapM parseImport $ childrenBy (tag "import") e
         where
-          parseImport i = ModuleImport <$> reqAttr i "name"
+          parseImport i = A.ModuleImport <$> reqAttr i "name"
