@@ -51,5 +51,3 @@ main = do
         _ -> return False
 
   runUi c defaultContext
-
-  return ()
