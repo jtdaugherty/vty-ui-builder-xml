@@ -8,7 +8,7 @@ import Control.Applicative
 
 import Text.XML.HaXml.Types hiding (Reference)
 import Text.XML.HaXml.Posn
-import Text.XML.HaXml.Namespaces (printableName)
+import Text.XML.HaXml.Namespaces (printableName, localName)
 import Text.XML.HaXml.Combinators hiding (tag)
 
 import qualified Graphics.Vty.Widgets.Builder.AST as A
@@ -22,10 +22,6 @@ toSourceLocation p =
                      , A.srcColumn = posnColumn p
                      }
 
-shortName :: QName -> String
-shortName (N s) = s
-shortName (QN _ s) = s
-
 type NSURI = String
 type ShortName = String
 
@@ -37,7 +33,7 @@ tag _ _ _ = []
 reqAttr :: Content Posn -> String -> XMLParse String
 reqAttr (CElem (Elem eName attrs _) posn) nam =
     let err = ParseError msg posn
-        msg = concat [ show $ shortName eName
+        msg = concat [ show $ localName eName
                      , " element requires "
                      , show nam
                      , " attribute"
@@ -124,7 +120,7 @@ elemNS c ns =
 parseWidgetSpec :: Content Posn -> XMLParse A.WidgetSpec
 parseWidgetSpec e@(CElem elmt@(Elem nam _ _) posn) =
     elemNS e widgetNS *>
-    (A.WidgetSpec (shortName nam)
+    (A.WidgetSpec (localName nam)
          <$> (optional $ reqAttr e "id")
          <*> attrValues elmt posn
          <*> specContents elmt
@@ -134,7 +130,7 @@ parseWidgetSpec c =
 
 attrValues :: Element Posn -> Posn -> XMLParse [(String, String)]
 attrValues e@(Elem _ attrs _) posn =
-    mapM (\k -> (,) k <$> reqAttr (CElem e posn) k) $ map (shortName . fst) attrs
+    mapM (\k -> (,) k <$> reqAttr (CElem e posn) k) $ map (localName . fst) attrs
 
 specContents :: Element Posn -> XMLParse [A.WidgetSpecContent]
 specContents (Elem _ _ cs) = mapM parseSpecContent cs
@@ -156,7 +152,7 @@ elemContents (Elem _ _ cs) = mapM parseSpecContent cs
 parseChildElement :: Content Posn -> XMLParse A.Element
 parseChildElement e@(CElem e2@(Elem n _ _) posn) =
     elemNS e dataNS *>
-    (A.Element (shortName n)
+    (A.Element (localName n)
           <$> attrValues e2 posn
           <*> elemContents e2
           <*> (pure $ toSourceLocation posn))
