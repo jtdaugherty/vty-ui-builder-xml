@@ -19,9 +19,8 @@ xmlReader :: DocumentReader
 xmlReader = DocumentReader { readDoc = xmlReadDoc
                            }
 
-parseAndValidate :: FilePath -> IO (Either [(String, A.SourceLocation)] (Element Posn))
-parseAndValidate inputXmlPath = do
-  xmlContents <- readFile inputXmlPath
+parseAndValidate :: FilePath -> String -> IO (Either [(String, A.SourceLocation)] (Element Posn))
+parseAndValidate inputXmlPath xmlContents = do
   case xmlParse' inputXmlPath xmlContents of
     Left e -> return $ Left [ ("Error parsing input XML "
                                ++ (show inputXmlPath) ++ ": " ++ e
@@ -31,9 +30,9 @@ parseAndValidate inputXmlPath = do
       let (Document _ _ e _) = resolveAllNames qualify d
       return $ Right e
 
-xmlReadDoc :: FilePath -> IO (Either [(String, A.SourceLocation)] A.Doc)
-xmlReadDoc path = do
-  parsed <- parseAndValidate path
+xmlReadDoc :: FilePath -> String -> IO (Either [(String, A.SourceLocation)] A.Doc)
+xmlReadDoc path src = do
+  parsed <- parseAndValidate path src
   case parsed of
     Left es -> return $ Left es
     Right e ->
