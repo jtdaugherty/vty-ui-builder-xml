@@ -53,10 +53,11 @@ reqAttr _ _ =
 
 docFromXml :: Content Posn -> XMLParse A.Doc
 docFromXml e =
-    A.Doc <$> parseInterfaces e
-         <*> parseParams e
-         <*> parseShared e
-         <*> parseImports e
+    elemNS e coreNS *>
+    (A.Doc <$> parseInterfaces e
+           <*> parseParams e
+           <*> parseShared e
+           <*> parseImports e)
 
 parseInterfaces :: Content Posn -> XMLParse [A.Interface]
 parseInterfaces =
