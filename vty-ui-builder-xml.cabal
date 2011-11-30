@@ -15,6 +15,7 @@ Cabal-version:       >=1.8
 
 Data-files:
   README
+  tests/validation/*.test
 
 Source-Repository head
   type:     git
@@ -63,6 +64,8 @@ Executable vty-ui-builder-xml-demo
 Executable vty-ui-builder-xml-tests
   Hs-Source-Dirs:       tests
   Main-is:              TestDriver.hs
+  Other-modules:
+    Validation
   GHC-Options:          -Wall
   Build-Depends:
     template-haskell >= 2.5.0.0,
