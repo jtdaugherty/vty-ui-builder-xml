@@ -1,0 +1,12 @@
+Empty focus group
+---
+<?xml version="1.0" encoding="UTF-8" ?>
+<collection>
+  <interface name="i">
+    <fText id="t">stuff</fText>
+    <focusGroup>
+    </focusGroup>
+  </interface>
+</collection>
+---
+success
