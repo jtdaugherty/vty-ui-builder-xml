@@ -3,7 +3,7 @@ Interface with no name attribute
 <?xml version="1.0" encoding="UTF-8" ?>
 <collection>
   <interface>
-    <fText id="t">test</fText>
+    <w:fText id="t">test</w:fText>
     <focusGroup>
       <entry name="t"/>
     </focusGroup>

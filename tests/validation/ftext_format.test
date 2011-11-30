@@ -1,11 +1,14 @@
 Formatted text constitutes a widget
 ---
-<collection>
+<collection xmlns:c="http://codevine.org/vty-ui-builder/xmlns/core/1.0"
+            xmlns:d="http://codevine.org/vty-ui-builder/xmlns/data/1.0"
+            xmlns:w="http://codevine.org/vty-ui-builder/xmlns/widget/1.0"
+            xmlns="http://codevine.org/vty-ui-builder/xmlns/core/1.0">
   <interface name="text">
-    <vBox id="w1">
-      <edit/>
-      <format name="wrap"><fText>This is some <attr fg="cyan">cyan</attr> text.</fText></format>
-    </vBox>
+    <w:vBox id="w1">
+      <w:edit/>
+      <w:wrap><w:fText>This is some <d:attr fg="cyan">cyan</d:attr> text.</fText></w:wrap>
+    </w:vBox>
     <focusGroup>
       <entry name="w1"/>
     </focusGroup>

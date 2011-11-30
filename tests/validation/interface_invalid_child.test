@@ -1,9 +1,12 @@
 Interface with an unknown child element
 ---
 <?xml version="1.0" encoding="UTF-8" ?>
-<collection>
+<collection xmlns:c="http://codevine.org/vty-ui-builder/xmlns/core/1.0"
+            xmlns:d="http://codevine.org/vty-ui-builder/xmlns/data/1.0"
+            xmlns:w="http://codevine.org/vty-ui-builder/xmlns/widget/1.0"
+            xmlns="http://codevine.org/vty-ui-builder/xmlns/core/1.0">
   <interface name="i">
-    <invalid/>
+    <w:invalid/>
     <focusGroup>
       <entry name="t"/>
     </focusGroup>
