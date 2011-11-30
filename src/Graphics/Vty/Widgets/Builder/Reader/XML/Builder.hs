@@ -5,6 +5,7 @@ module Graphics.Vty.Widgets.Builder.Reader.XML.Builder
 where
 
 import Control.Applicative
+import Control.Monad (forM)
 
 import Text.XML.HaXml.Types hiding (Reference)
 import Text.XML.HaXml.Posn
@@ -97,11 +98,15 @@ parseParams e =
 
 -- Looks for a 'shared' child element of the specified element.  If
 -- one is not found, returns empty list.
-parseShared :: Content Posn -> XMLParse [A.WidgetSpec]
+parseShared :: Content Posn -> XMLParse [(String, A.WidgetSpec)]
 parseShared e =
     concat <$> (mapM parseShared' $ childrenBy (tag coreNS "shared") e)
         where
-          parseShared' = mapM parseWidgetSpec . childrenBy elm
+          parseShared' sh =
+              forM (childrenBy elm sh) $ \ch ->
+                  (,)
+                  <$> reqAttr ch "id"
+                  <*> parseWidgetSpec ch
 
 elemNS :: Content Posn -> NSURI -> XMLParse ()
 elemNS (CElem (Elem (N _) _ _) posn) ns =
