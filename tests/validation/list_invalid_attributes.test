@@ -1,0 +1,28 @@
+A list cannot have invalid attributes
+---
+<?xml version="1.0" encoding="UTF-8" ?>
+<collection xmlns:c="http://codevine.org/vty-ui-builder/xmlns/core/1.0"
+            xmlns:d="http://codevine.org/vty-ui-builder/xmlns/data/1.0"
+            xmlns:w="http://codevine.org/vty-ui-builder/xmlns/widget/1.0"
+            xmlns="http://codevine.org/vty-ui-builder/xmlns/core/1.0">
+  <interface name="i">
+    <w:vBox>
+      <w:stringList cursorFg="bogus" />
+      <w:stringList cursorBg="bogus" />
+    </w:vBox>
+    <focusGroup/>
+  </interface>
+
+  <interface name="i2">
+    <w:vBox>
+      <w:list keyType="Foo" elemType="Bar" cursorFg="bogus" />
+      <w:list keyType="Foo" elemType="Bar" cursorBg="bogus" />
+    </w:vBox>
+    <focusGroup/>
+  </interface>
+</collection>
+---
+-:8:7: Color "bogus" invalid, must be one of ["red","green","yellow","blue","magenta","cyan","white","black","bright_red","bright_green","bright_yellow","bright_black","bright_magenta","bright_cyan","bright_white","bright_blue"]
+-:9:7: Color "bogus" invalid, must be one of ["red","green","yellow","blue","magenta","cyan","white","black","bright_red","bright_green","bright_yellow","bright_black","bright_magenta","bright_cyan","bright_white","bright_blue"]
+-:16:7: Color "bogus" invalid, must be one of ["red","green","yellow","blue","magenta","cyan","white","black","bright_red","bright_green","bright_yellow","bright_black","bright_magenta","bright_cyan","bright_white","bright_blue"]
+-:17:7: Color "bogus" invalid, must be one of ["red","green","yellow","blue","magenta","cyan","white","black","bright_red","bright_green","bright_yellow","bright_black","bright_magenta","bright_cyan","bright_white","bright_blue"]
