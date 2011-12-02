@@ -606,4 +606,130 @@
     </w:vBox>
   </interface>
 
+  <interface name="table">
+    <w:vBox>
+      <w:fText><d:attr fg="green">table</d:attr> demo</w:fText>
+      <w:hBorder/>
+
+      <w:vBox spacing="1">
+        <w:table>
+          <d:columns>
+            <d:column size="auto"/>
+            <d:column size="auto"/>
+          </d:columns>
+          <d:row>
+            <d:cell>
+              <w:fText>Row 1, Cell 1 (auto width)</w:fText>
+            </d:cell>
+            <d:cell>
+              <w:fText>Row 1, Cell 2 (auto width)</w:fText>
+            </d:cell>
+          </d:row>
+          <d:row>
+            <d:cell>
+              <w:fText>Row 2, Cell 1 (auto width)</w:fText>
+            </d:cell>
+            <d:cell>
+              <w:fText>Row 2, Cell 2 (auto width)</w:fText>
+            </d:cell>
+          </d:row>
+        </w:table>
+
+        <w:table>
+          <d:columns>
+            <d:column size="40"/>
+            <d:column size="30"/>
+          </d:columns>
+          <d:row>
+            <d:cell>
+              <w:fText>Row 1, Cell 1 (fixed width)</w:fText>
+            </d:cell>
+            <d:cell>
+              <w:fText>Row 1, Cell 2 (fixed width)</w:fText>
+            </d:cell>
+          </d:row>
+          <d:row>
+            <d:cell>
+              <w:fText>Row 2, Cell 1 (fixed width)</w:fText>
+            </d:cell>
+            <d:cell>
+              <w:fText>Row 2, Cell 2 (fixed width)</w:fText>
+            </d:cell>
+          </d:row>
+        </w:table>
+
+        <w:table borderStyle="rows">
+          <d:columns>
+            <d:column size="30"/>
+          </d:columns>
+          <d:row>
+            <d:cell>
+              <w:fText>Row borders only</w:fText>
+            </d:cell>
+          </d:row>
+          <d:row>
+            <d:cell>
+              <w:fText>Row borders only</w:fText>
+            </d:cell>
+          </d:row>
+        </w:table>
+
+        <w:table borderStyle="columns">
+          <d:columns>
+            <d:column size="30"/>
+            <d:column size="30"/>
+          </d:columns>
+          <d:row>
+            <d:cell>
+              <w:fText>Column borders only</w:fText>
+            </d:cell>
+            <d:cell>
+              <w:fText>Column borders only</w:fText>
+            </d:cell>
+          </d:row>
+        </w:table>
+
+        <w:table borderStyle="edges">
+          <d:columns>
+            <d:column size="30"/>
+          </d:columns>
+          <d:row>
+            <d:cell>
+              <w:fText>Edge borders only</w:fText>
+            </d:cell>
+          </d:row>
+          <d:row>
+            <d:cell>
+              <w:fText>Edge borders only</w:fText>
+            </d:cell>
+          </d:row>
+        </w:table>
+
+        <w:table borderStyle="columns,rows">
+          <d:columns>
+            <d:column size="30"/>
+            <d:column size="30"/>
+          </d:columns>
+          <d:row>
+            <d:cell>
+              <w:fText>Column and row borders only</w:fText>
+            </d:cell>
+            <d:cell>
+              <w:fText>Column and row borders only</w:fText>
+            </d:cell>
+          </d:row>
+          <d:row>
+            <d:cell>
+              <w:fText>Column and row borders only</w:fText>
+            </d:cell>
+            <d:cell>
+              <w:fText>Column and row borders only</w:fText>
+            </d:cell>
+          </d:row>
+        </w:table>
+      </w:vBox>
+
+    </w:vBox>
+  </interface>
+
 </collection>
