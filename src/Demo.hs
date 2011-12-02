@@ -27,9 +27,9 @@ import Graphics.Vty.Widgets.Builder.Reader.XML (xmlUi)
   </interface>
 
   <interface name="ui2">
-    <w:format name="wrap">
+    <w:wrap>
       <w:fText>This is a <d:attr fg="green">second</d:attr> interface.</w:fText>
-    </w:format>
+    </w:wrap>
   </interface>
 </collection>
 |]
