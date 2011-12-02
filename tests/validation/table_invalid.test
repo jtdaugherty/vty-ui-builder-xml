@@ -1,0 +1,112 @@
+Invalid tables
+---
+<?xml version="1.0" encoding="UTF-8" ?>
+<collection xmlns:c="http://codevine.org/vty-ui-builder/xmlns/core/1.0"
+            xmlns:d="http://codevine.org/vty-ui-builder/xmlns/data/1.0"
+            xmlns:w="http://codevine.org/vty-ui-builder/xmlns/widget/1.0"
+            xmlns="http://codevine.org/vty-ui-builder/xmlns/core/1.0">
+  <interface name="i">
+    <w:table>
+      <d:row>
+        <d:cell>
+          <w:edit/>
+        </d:cell>
+      </d:row>
+      <d:row>
+        <d:cell>
+          <w:edit/>
+        </d:cell>
+        <d:cell>
+          <w:edit/>
+        </d:cell>
+      </d:row>
+    </w:table>
+    <focusGroup/>
+  </interface>
+
+  <interface name="i2">
+    <w:table>
+      <d:row>
+        <d:cell>
+          <d:stuff/>
+        </d:cell>
+      </d:row>
+    </w:table>
+    <focusGroup/>
+  </interface>
+
+  <interface name="i2">
+    <w:table borderStyle="invalid">
+      <d:columns>
+        <d:column size="auto"/>
+      </d:columns>
+      <d:row>
+        <d:cell>
+          <w:edit/>
+        </d:cell>
+      </d:row>
+    </w:table>
+    <focusGroup/>
+  </interface>
+
+  <interface name="i2">
+    <w:table borderStyle="rows,invalid">
+      <d:columns>
+        <d:column size="auto"/>
+      </d:columns>
+      <d:row>
+        <d:cell>
+          <w:edit/>
+        </d:cell>
+      </d:row>
+    </w:table>
+    <focusGroup/>
+  </interface>
+
+  <interface name="i2">
+    <w:table borderStyle="rows">
+      <d:columns>
+        <d:column size="auto"/>
+        <d:column size="auto"/>
+      </d:columns>
+      <d:row>
+        <d:cell>
+          <w:edit/>
+        </d:cell>
+      </d:row>
+    </w:table>
+    <focusGroup/>
+  </interface>
+
+  <interface name="i2">
+    <w:table borderStyle="rows">
+      <d:columns>
+      </d:columns>
+      <d:row>
+        <d:cell>
+          <w:edit/>
+        </d:cell>
+      </d:row>
+    </w:table>
+    <focusGroup/>
+  </interface>
+
+  <interface name="i2">
+    <w:table>
+      <d:columns>
+        <d:column size="auto"/>
+      </d:columns>
+      <d:row>
+      </d:row>
+    </w:table>
+    <focusGroup/>
+  </interface>
+</collection>
+---
+-:7:5: all rows must have the same number of cells
+-:28:9: required first child widget is missing
+-:37:5: invalid border style flag "invalid", valid choices are 'none', 'full', or a comma-separated list of ["rows","columns","edges"]
+-:51:5: invalid border style flag "invalid", valid choices are 'none', 'full', or a comma-separated list of ["rows","columns","edges"]
+-:65:5: number of column specifications must match the number of columns (1)
+-:80:5: table must have at least one column specification
+-:93:5: all rows must contain at least one cell
