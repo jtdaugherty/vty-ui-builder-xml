@@ -13,5 +13,4 @@ fText with invalid colors
   </interface>
 </collection>
 ---
-^Value "invalid" of attribute "fg" in element <attr> is not in the required enumeration range
-^Value "invalid" of attribute "bg" in element <attr> is not in the required enumeration range
+-:7:21: Color "invalid" invalid, must be one of ["red","green","yellow","blue","magenta","cyan","white","black","bright_red","bright_green","bright_yellow","bright_black","bright_magenta","bright_cyan","bright_white","bright_blue"]

@@ -13,8 +13,4 @@ Interface with an unknown child element
   </interface>
 </collection>
 ---
-# Both for invalid element
-^Element <interface> should contain
-^Element <interface> should contain
-Element <interface> contains extra elements beyond its content spec.
-Element <invalid> not known.
+-:7:5: unknown widget type "invalid"

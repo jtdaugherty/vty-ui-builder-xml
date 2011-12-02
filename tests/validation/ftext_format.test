@@ -7,7 +7,7 @@ Formatted text constitutes a widget
   <interface name="text">
     <w:vBox id="w1">
       <w:edit/>
-      <w:wrap><w:fText>This is some <d:attr fg="cyan">cyan</d:attr> text.</fText></w:wrap>
+      <w:wrap><w:fText>This is some <d:attr fg="cyan">cyan</d:attr> text.</w:fText></w:wrap>
     </w:vBox>
     <focusGroup>
       <entry name="w1"/>

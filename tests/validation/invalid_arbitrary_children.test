@@ -1,8 +1,3 @@
-# This test checks that validation is not too loose in what it permits
-# in arbitrary widget element positions.  This stems from an early DTD
-# generation bug in which too many element types were included in
-# %all;, resulting in document validation successes for documents like
-# this one which don't actually describe anything meaningful.
 Arbitrary elements not permitted as widgets
 ---
 <?xml version="1.0" encoding="UTF-8" ?>
@@ -25,4 +20,4 @@ Arbitrary elements not permitted as widgets
   </interface>
 </collection>
 ---
-^Element <interface> should contain
+-:7:5: Expected element in namespace "http://codevine.org/vty-ui-builder/xmlns/widget/1.0", got element in namespace "http://codevine.org/vty-ui-builder/xmlns/core/1.0"

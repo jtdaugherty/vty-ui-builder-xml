@@ -13,4 +13,4 @@ hFill with empty fill char
   </interface>
 </collection>
 ---
-hFill: attribute 'char' must be non-empty
+-:7:5: Attribute "char" must be non-empty

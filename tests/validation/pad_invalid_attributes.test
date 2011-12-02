@@ -15,4 +15,4 @@ pad element with invalid attribute
   </interface>
 </collection>
 ---
-pad: attribute 'top' must be an integer
+-:7:5: Attribute "top" value must be an integer

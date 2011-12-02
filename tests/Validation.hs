@@ -123,12 +123,9 @@ runValidationTest tc = do
                                                , "\nActual:\n"
                                                , intercalate "\n" actualMsgs
                                                ]
-            Right ast -> do
-                         print doc
-                         print ast
-                         assertFailure $ concat [ "validation succeeded but should have failed with the following errors:\n"
-                                                , intercalate "\n" es
-                                                ]
+            Right _ -> assertFailure $ concat [ "validation succeeded but should have failed with the following errors:\n"
+                                              , intercalate "\n" es
+                                              ]
     (Left actualEs, Failure expectedEs) ->
         do
           let actualMsgs = map (\(msg, loc) -> show (loc { srcFile = "-"}) ++ ": " ++ msg) actualEs

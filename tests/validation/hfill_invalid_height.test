@@ -13,4 +13,4 @@ hFill with invalid height
   </interface>
 </collection>
 ---
-hFill: attribute 'height' must be an integer
+-:7:5: Attribute "height" value must be an integer

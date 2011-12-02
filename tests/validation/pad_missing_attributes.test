@@ -15,4 +15,4 @@ pad element missing attributes
   </interface>
 </collection>
 ---
-pad: at least one padding attribute must be specified
+-:7:5: element requires at least one padding attribute

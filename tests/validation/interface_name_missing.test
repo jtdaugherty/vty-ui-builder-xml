@@ -1,7 +1,10 @@
 Interface with no name attribute
 ---
 <?xml version="1.0" encoding="UTF-8" ?>
-<collection>
+<collection xmlns:c="http://codevine.org/vty-ui-builder/xmlns/core/1.0"
+            xmlns:d="http://codevine.org/vty-ui-builder/xmlns/data/1.0"
+            xmlns:w="http://codevine.org/vty-ui-builder/xmlns/widget/1.0"
+            xmlns="http://codevine.org/vty-ui-builder/xmlns/core/1.0">
   <interface>
     <w:fText id="t">test</w:fText>
     <focusGroup>
@@ -10,4 +13,4 @@ Interface with no name attribute
   </interface>
 </collection>
 ---
-Element <interface> requires the attribute "name" but it is missing.
+-:6:3: "interface" element requires "name" attribute

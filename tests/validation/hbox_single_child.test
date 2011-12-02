@@ -15,4 +15,4 @@ hBox has only one child
   </interface>
 </collection>
 ---
-^Element <hBox> should contain
+-:7:5: Box must have at least two children

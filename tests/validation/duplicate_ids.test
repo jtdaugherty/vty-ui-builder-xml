@@ -11,9 +11,10 @@ Duplicate IDs not permitted
       <w:fText id="testing"></w:fText>
     </w:vBox>
     <focusGroup>
-      <entry name="t"/>
+      <entry name="testing"/>
     </focusGroup>
   </interface>
 </collection>
 ---
-These attribute values of type ID are not unique: testing.
+-:8:7: Duplicate widget ID "testing" defined
+-:9:7: Duplicate widget ID "testing" defined

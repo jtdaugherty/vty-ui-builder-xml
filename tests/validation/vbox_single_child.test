@@ -15,4 +15,4 @@ vBox has only one child
   </interface>
 </collection>
 ---
-^Element <vBox> should contain
+-:7:5: Box must have at least two children
