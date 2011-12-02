@@ -1,0 +1,26 @@
+fText cannot have various types of unsupported children
+---
+<?xml version="1.0" encoding="UTF-8" ?>
+<collection xmlns:c="http://codevine.org/vty-ui-builder/xmlns/core/1.0"
+            xmlns:d="http://codevine.org/vty-ui-builder/xmlns/data/1.0"
+            xmlns:w="http://codevine.org/vty-ui-builder/xmlns/widget/1.0"
+            xmlns="http://codevine.org/vty-ui-builder/xmlns/core/1.0">
+  <shared>
+    <w:fText id="foobar"></w:fText>
+  </shared>
+
+  <interface name="i">
+    <w:vBox>
+      <w:fText><w:hBorder/></w:fText>
+      <w:fText><d:attr><w:hBorder/></d:attr></w:fText>
+      <w:fText><d:stuff/></w:fText>
+      <w:fText><ref target="foobar"/></w:fText>
+    </w:vBox>
+    <focusGroup/>
+  </interface>
+</collection>
+---
+-:12:7: got unsupported child of fText: widget-like
+-:13:7: got unsupported child of attr: widget-like
+-:14:7: got unsupported child of fText: stuff
+-:15:7: got unsupported child of fText: widget-like

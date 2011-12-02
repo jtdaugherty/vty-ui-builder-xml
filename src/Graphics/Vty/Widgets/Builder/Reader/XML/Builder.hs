@@ -150,7 +150,8 @@ specContents (Elem _ _ cs) = mapM parseSpecContent cs
 elemContents :: Element Posn -> XMLParse [A.ElementContent]
 elemContents (Elem _ _ cs) = mapM parseSpecContent cs
     where
-      parseSpecContent e@(CElem _ _) = A.ElemChild <$> parseChildElement e
+      parseSpecContent e@(CElem _ _) = (A.ElemChild <$> parseChildElement e)
+                                       <|> (A.ElemChildWidgetLike <$> parseWidgetLike e)
       parseSpecContent (CString _ s posn) = return $ A.ElemText s (toSourceLocation posn)
       parseSpecContent c =
           ParseError "Content must be child element or string" (info c)
