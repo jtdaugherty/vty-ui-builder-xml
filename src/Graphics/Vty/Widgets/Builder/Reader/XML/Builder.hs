@@ -99,7 +99,7 @@ parseParams e =
 
 -- Looks for a 'shared' child element of the specified element.  If
 -- one is not found, returns empty list.
-parseShared :: Content Posn -> XMLParse [(String, A.WidgetSpec)]
+parseShared :: Content Posn -> XMLParse [(String, A.WidgetElement)]
 parseShared e =
     concat <$> (mapM parseShared' $ childrenBy (tag coreNS "shared") e)
         where
@@ -107,7 +107,7 @@ parseShared e =
               forM (childrenBy elm sh) $ \ch ->
                   (,)
                   <$> reqAttr ch "id"
-                  <*> parseWidgetSpec ch
+                  <*> parseWidgetElement ch
 
 elemNS :: Content Posn -> NSURI -> XMLParse ()
 elemNS (CElem (Elem (N _) _ _) posn) ns =
@@ -123,52 +123,43 @@ elemNS c ns =
     ParseError ("Expected element in namespace " ++ show ns ++
                 ", got non-element content") (info c)
 
-parseWidgetSpec :: Content Posn -> XMLParse A.WidgetSpec
-parseWidgetSpec e@(CElem elmt@(Elem nam _ _) posn) =
+parseWidgetElement :: Content Posn -> XMLParse A.WidgetElement
+parseWidgetElement e@(CElem (Elem _ _ _) _) =
     elemNS e widgetNS *>
-    (A.WidgetSpec (localName nam)
-         <$> (optional $ reqAttr e "id")
-         <*> attrValues elmt posn
-         <*> specContents elmt
-         <*> pure (toSourceLocation posn))
-parseWidgetSpec c =
-    ParseError "Content expected to be a child element" (info c)
+    (A.WidgetElement
+          <$> (optional $ reqAttr e "id")
+          <*> parseElement e)
+parseWidgetElement c =
+    ParseError ("Expected widget element in namespace " ++ (show widgetNS))
+                   (info c)
 
 attrValues :: Element Posn -> Posn -> XMLParse [(String, String)]
 attrValues e@(Elem _ attrs _) posn =
     mapM (\k -> (,) k <$> reqAttr (CElem e posn) k) $ map (localName . fst) attrs
 
-specContents :: Element Posn -> XMLParse [A.WidgetSpecContent]
-specContents (Elem _ _ cs) = mapM parseSpecContent cs
-    where
-      parseSpecContent e@(CElem _ _) = (A.ChildWidgetLike <$> parseWidgetLike e)
-                                       <|> (A.ChildElement <$> parseChildElement e)
-      parseSpecContent (CString _ s posn) = return $ A.Text s (toSourceLocation posn)
-      parseSpecContent c =
-          ParseError "Content must be child element or string" (info c)
-
 elemContents :: Element Posn -> XMLParse [A.ElementContent]
-elemContents (Elem _ _ cs) = mapM parseSpecContent cs
+elemContents (Elem _ _ cs) = mapM parseElemContent cs
     where
-      parseSpecContent e@(CElem _ _) = (A.ElemChild <$> parseChildElement e)
-                                       <|> (A.ElemChildWidgetLike <$> parseWidgetLike e)
-      parseSpecContent (CString _ s posn) = return $ A.ElemText s (toSourceLocation posn)
-      parseSpecContent c =
+      parseElemContent e@(CElem _ _) =
+          (elemNS e dataNS *> (A.ChildElement <$> parseElement e))
+          <|> (A.ChildWidgetLike <$> parseWidgetLike e)
+      parseElemContent (CString _ s posn) = return $ A.Text s (toSourceLocation posn)
+      parseElemContent c =
           ParseError "Content must be child element or string" (info c)
 
-parseChildElement :: Content Posn -> XMLParse A.Element
-parseChildElement e@(CElem e2@(Elem n _ _) posn) =
-    elemNS e dataNS *>
+-- Note: no namespace requirement.
+parseElement :: Content Posn -> XMLParse A.Element
+parseElement (CElem e2@(Elem n _ _) posn) =
     (A.Element (localName n)
           <$> attrValues e2 posn
           <*> elemContents e2
           <*> (pure $ toSourceLocation posn))
-parseChildElement c =
+parseElement c =
     ParseError "Expected element, got non-element content" (info c)
 
 parseWidgetLike :: Content Posn -> XMLParse A.WidgetLike
 parseWidgetLike e = (A.Ref <$> parseReference e) <|>
-                    (A.Widget <$> parseWidgetSpec e)
+                    (A.Widget <$> parseWidgetElement e)
 
 parseReference :: Content Posn -> XMLParse A.Reference
 parseReference =
