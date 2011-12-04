@@ -1,4 +1,4 @@
-hBox has only one child
+Box
 ---
 <?xml version="1.0" encoding="UTF-8" ?>
 <collection xmlns:c="http://codevine.org/vty-ui-builder/xmlns/core/1.0"
