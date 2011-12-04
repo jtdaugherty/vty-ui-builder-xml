@@ -1,0 +1,33 @@
+fText
+---
+<?xml version="1.0" encoding="UTF-8" ?>
+<collection xmlns:c="http://codevine.org/vty-ui-builder/xmlns/core/1.0"
+            xmlns:d="http://codevine.org/vty-ui-builder/xmlns/data/1.0"
+            xmlns:w="http://codevine.org/vty-ui-builder/xmlns/widget/1.0"
+            xmlns="http://codevine.org/vty-ui-builder/xmlns/core/1.0">
+  <interface name="i">
+    <w:fText id="t1">stuff <d:attr fg="blue">blue <d:attr bg="green">text</d:attr> <d:br/></d:attr><d:br/></w:fText>
+    <focusGroup>
+      <entry name="t1"/>
+    </focusGroup>
+  </interface>
+
+  <interface name="text">
+    <w:vBox id="w1">
+      <w:edit/>
+      <w:wrap><w:fText>This is some <d:attr fg="cyan">cyan</d:attr> text.</w:fText></w:wrap>
+    </w:vBox>
+    <focusGroup>
+      <entry name="w1"/>
+    </focusGroup>
+  </interface>
+
+  <interface name="i">
+    <w:fText id="t2"><d:attr fg="invalid" bg="invalid">stuff</d:attr></w:fText>
+    <focusGroup>
+      <entry name="t2"/>
+    </focusGroup>
+  </interface>
+</collection>
+---
+-:24:22: Color "invalid" invalid, must be one of ["red","green","yellow","blue","magenta","cyan","white","black","bright_red","bright_green","bright_yellow","bright_black","bright_magenta","bright_cyan","bright_white","bright_blue"]
