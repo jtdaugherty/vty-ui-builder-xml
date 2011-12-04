@@ -1,0 +1,192 @@
+hBox has only one child
+---
+<?xml version="1.0" encoding="UTF-8" ?>
+<collection xmlns:c="http://codevine.org/vty-ui-builder/xmlns/core/1.0"
+            xmlns:d="http://codevine.org/vty-ui-builder/xmlns/data/1.0"
+            xmlns:w="http://codevine.org/vty-ui-builder/xmlns/widget/1.0"
+            xmlns="http://codevine.org/vty-ui-builder/xmlns/core/1.0">
+  <interface name="i">
+    <w:hBox>
+      <w:fText id="t1">stuff</w:fText>
+    </w:hBox>
+    <focusGroup>
+      <entry name="t1"/>
+    </focusGroup>
+  </interface>
+
+  <interface name="i">
+    <w:vBox-sized percent="foobar">
+      <w:edit id="e1"/>
+      <w:vBox-sized percent="0">
+        <w:edit/>
+        <w:vBox-sized percent="100">
+          <w:edit/>
+          <w:vBox-sized>
+            <w:edit/>
+            <w:vBox-sized first="5">
+              <w:edit/>
+              <w:vBox-sized second="5">
+                <w:edit/>
+                <w:vBox-sized first="foo">
+                  <w:edit/>
+                  <w:vBox-sized second="foo">
+                    <w:edit/>
+                    <w:vBox-sized first="foo" second="foo">
+                      <w:edit/>
+                      <w:edit/>
+                    </w:vBox-sized>
+                  </w:vBox-sized>
+                </w:vBox-sized>
+              </w:vBox-sized>
+            </w:vBox-sized>
+          </w:vBox-sized>
+        </w:vBox-sized>
+      </w:vBox-sized>
+    </w:vBox-sized>
+
+    <focusGroup>
+      <entry name="e1"/>
+    </focusGroup>
+  </interface>
+
+  <interface name="i">
+    <w:hBox-sized percent="foobar">
+      <w:edit id="e2"/>
+      <w:hBox-sized percent="0">
+        <w:edit/>
+        <w:hBox-sized percent="100">
+          <w:edit/>
+          <w:hBox-sized>
+            <w:edit/>
+            <w:hBox-sized first="5">
+              <w:edit/>
+              <w:hBox-sized second="5">
+                <w:edit/>
+                <w:hBox-sized first="foo">
+                  <w:edit/>
+                  <w:hBox-sized second="foo">
+                    <w:edit/>
+                    <w:hBox-sized first="foo" second="foo">
+                      <w:edit/>
+                      <w:edit/>
+                    </w:hBox-sized>
+                  </w:hBox-sized>
+                </w:hBox-sized>
+              </w:hBox-sized>
+            </w:hBox-sized>
+          </w:hBox-sized>
+        </w:hBox-sized>
+      </w:hBox-sized>
+    </w:hBox-sized>
+
+    <focusGroup>
+      <entry name="e2"/>
+    </focusGroup>
+  </interface>
+
+  <interface name="i">
+    <w:vBox-sized percent="10">
+      <w:edit id="e3"/>
+      <w:edit/>
+    </w:vBox-sized>
+    <focusGroup>
+      <entry name="e3"/>
+    </focusGroup>
+  </interface>
+
+  <interface name="i">
+    <w:vBox-sized first="5" second="10">
+      <w:edit id="e10"/>
+      <w:edit/>
+    </w:vBox-sized>
+    <focusGroup>
+      <entry name="e10"/>
+    </focusGroup>
+  </interface>
+
+  <interface name="i">
+    <w:vBox-sized first="auto" second="10">
+      <w:edit id="e4"/>
+      <w:edit/>
+    </w:vBox-sized>
+    <focusGroup>
+      <entry name="e4"/>
+    </focusGroup>
+  </interface>
+
+  <interface name="i">
+    <w:vBox-sized first="5" second="auto">
+      <w:edit id="e5"/>
+      <w:edit/>
+    </w:vBox-sized>
+    <focusGroup>
+      <entry name="e5"/>
+    </focusGroup>
+  </interface>
+
+  <interface name="i">
+    <w:hBox-sized percent="10">
+      <w:edit id="e6"/>
+      <w:edit/>
+    </w:hBox-sized>
+    <focusGroup>
+      <entry name="e6"/>
+    </focusGroup>
+  </interface>
+
+  <interface name="i">
+    <w:hBox-sized first="5" second="10">
+      <w:edit id="e7"/>
+      <w:edit/>
+    </w:hBox-sized>
+    <focusGroup>
+      <entry name="e7"/>
+    </focusGroup>
+  </interface>
+
+  <interface name="i">
+    <w:hBox-sized first="auto" second="10">
+      <w:edit id="e8"/>
+      <w:edit/>
+    </w:hBox-sized>
+    <focusGroup>
+      <entry name="e8"/>
+    </focusGroup>
+  </interface>
+
+  <interface name="i">
+    <w:hBox-sized first="5" second="auto">
+      <w:edit id="e9"/>
+      <w:edit/>
+    </w:hBox-sized>
+    <focusGroup>
+      <entry name="e9"/>
+    </focusGroup>
+  </interface>
+
+  <interface name="i">
+    <w:vBox>
+      <w:fText id="t2">stuff</w:fText>
+    </w:vBox>
+    <focusGroup>
+      <entry name="t2"/>
+    </focusGroup>
+  </interface>
+</collection>
+---
+-:7:5: Box must have at least two children
+-:16:5: Either a percentage or first/second size policy must be specified for this box
+-:22:11: Either a percentage or first/second size policy must be specified for this box
+-:24:13: Either a percentage or first/second size policy must be specified for this box
+-:26:15: Either a percentage or first/second size policy must be specified for this box
+-:28:17: Either a percentage or first/second size policy must be specified for this box
+-:30:19: Either a percentage or first/second size policy must be specified for this box
+-:32:21: Either a percentage or first/second size policy must be specified for this box
+-:51:5: Either a percentage or first/second size policy must be specified for this box
+-:57:11: Either a percentage or first/second size policy must be specified for this box
+-:59:13: Either a percentage or first/second size policy must be specified for this box
+-:61:15: Either a percentage or first/second size policy must be specified for this box
+-:63:17: Either a percentage or first/second size policy must be specified for this box
+-:65:19: Either a percentage or first/second size policy must be specified for this box
+-:67:21: Either a percentage or first/second size policy must be specified for this box
+-:166:5: Box must have at least two children
