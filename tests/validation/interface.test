@@ -34,4 +34,4 @@ Interface
 </collection>
 ---
 # TODO: -:7:5: unknown widget type "invalid"
--:25:3: "interface" element requires "name" attribute
+-:26:3: "interface" element requires "name" attribute
