@@ -3,6 +3,10 @@
             xmlns:d="http://codevine.org/vty-ui-builder/xmlns/data/1.0"
             xmlns:w="http://codevine.org/vty-ui-builder/xmlns/widget/1.0"
             xmlns="http://codevine.org/vty-ui-builder/xmlns/core/1.0">
+  <shared>
+    <w:fText id="shared">This is a shared text widget.</w:fText>
+  </shared>
+
   <!-- Introduction -->
   <interface name="intro">
     <w:vBox>
@@ -503,6 +507,7 @@
       </w:bordered>
       <ref target="theWidget"/>
       <ref target="theWidget"/>
+      <ref target="shared"/>
     </w:vBox>
   </interface>
 
