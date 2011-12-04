@@ -39,7 +39,15 @@ doQuoteDec src = do
                 forM_ es $ \(msg, _) -> report True $ msg
                 fail "Could not parse input document due to previous errors"
     Right doc -> do
-                modResult <- runIO $ generateSourceForDocument defaultConfig doc coreSpecHandlers
+                -- This may be the default config already, but this
+                -- way we're explicit in case the defaults ever
+                -- change, since this is what is necessary for the
+                -- splice to work.
+                let config = defaultConfig { generateMain = False
+                                           , generateInterfaceType = True
+                                           , generateInterfaceBuilder = True
+                                           }
+                modResult <- runIO $ generateSourceForDocument config doc coreSpecHandlers
                 case modResult of
                   Left es -> do
                     forM_ es $ report True . show
