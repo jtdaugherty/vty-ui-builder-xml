@@ -10,7 +10,7 @@ Valid reference
   </params>
 
   <shared>
-    <w:fText id="sharedText"/>
+    <w:fText sharedId="sharedText"/>
   </shared>
 
   <interface name="i">

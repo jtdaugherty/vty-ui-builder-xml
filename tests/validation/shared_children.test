@@ -16,4 +16,4 @@ Children of 'shared' need 'id' attributes
   </interface>
 </collection>
 ---
--:7:5: "edit" element requires "id" attribute
+-:7:5: "edit" element requires "sharedId" attribute

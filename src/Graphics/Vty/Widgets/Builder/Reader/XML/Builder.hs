@@ -106,7 +106,7 @@ parseShared e =
           parseShared' sh =
               forM (childrenBy elm sh) $ \ch ->
                   (,)
-                  <$> reqAttr ch "id"
+                  <$> reqAttr ch "sharedId"
                   <*> parseWidgetElement ch
 
 elemNS :: Content Posn -> NSURI -> XMLParse ()

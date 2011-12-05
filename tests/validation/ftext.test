@@ -7,7 +7,7 @@ fText
             xmlns="http://codevine.org/vty-ui-builder/xmlns/core/1.0">
 
   <shared>
-    <w:fText id="foobar"></w:fText>
+    <w:fText sharedId="foobar"></w:fText>
   </shared>
 
   <interface name="i">

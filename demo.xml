@@ -4,7 +4,7 @@
             xmlns:w="http://codevine.org/vty-ui-builder/xmlns/widget/1.0"
             xmlns="http://codevine.org/vty-ui-builder/xmlns/core/1.0">
   <shared>
-    <w:fText id="shared">This is a shared text widget.</w:fText>
+    <w:fText sharedId="shared">This is a shared text widget.</w:fText>
   </shared>
 
   <!-- Introduction -->
@@ -505,9 +505,9 @@
           <w:fText>This box is the referenced widget, but it is only defined once in the document.</w:fText>
         </w:wrap>
       </w:bordered>
-      <ref target="theWidget"/>
-      <ref target="theWidget"/>
-      <ref target="shared"/>
+      <wref target="theWidget"/>
+      <wref target="theWidget"/>
+      <shref target="shared"/>
     </w:vBox>
   </interface>
 
