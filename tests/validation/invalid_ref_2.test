@@ -9,14 +9,11 @@ Invalid refs are caught
     <w:fText sharedId="nonexistent_w"/>
   </shared>
 
-  <interface name="i2">
-    <w:vBox>
-      <w:fText id="nonexistent1"/>
-      <pref target="nonexistent1"/>
-    </w:vBox>
+  <interface name="i">
+    <wref target="nonexistent_w"/>
     <focusGroup>
     </focusGroup>
   </interface>
 </collection>
 ---
--:13:7: Parameter reference named "nonexistent1" is invalid; no such parameter
+-:11:5: Widget reference for "nonexistent_w" is invalid; no widget with that ID defined in interface "i"

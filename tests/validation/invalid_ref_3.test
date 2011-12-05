@@ -5,18 +5,14 @@ Invalid refs are caught
             xmlns:d="http://codevine.org/vty-ui-builder/xmlns/data/1.0"
             xmlns:w="http://codevine.org/vty-ui-builder/xmlns/widget/1.0"
             xmlns="http://codevine.org/vty-ui-builder/xmlns/core/1.0">
-  <shared>
-    <w:fText sharedId="nonexistent_w"/>
-  </shared>
-
-  <interface name="i2">
+  <interface name="i3">
     <w:vBox>
       <w:fText id="nonexistent1"/>
-      <pref target="nonexistent1"/>
+      <shref target="nonexistent1"/>
     </w:vBox>
     <focusGroup>
     </focusGroup>
   </interface>
 </collection>
 ---
--:13:7: Parameter reference named "nonexistent1" is invalid; no such parameter
+-:9:7: Shared widget reference for "nonexistent1" is invalid; no shared widget with that ID defined in document
