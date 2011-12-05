@@ -32,7 +32,6 @@
     </w:vBox>
   </interface>
 
-  <!-- bordered.dtd -->
   <interface name="bordered">
     <w:vBox>
       <w:fText><d:attr fg="green">bordered</d:attr> demo</w:fText>
@@ -51,7 +50,6 @@
     </w:vBox>
   </interface>
 
-  <!-- button.dtd -->
   <interface name="button">
     <w:vBox id="button">
       <w:fText><d:attr fg="green">button</d:attr> demo</w:fText>
@@ -71,7 +69,6 @@
     </focusGroup>
   </interface>
 
-  <!-- centered.dtd -->
   <interface name="centered">
     <w:vBox>
       <w:fText><d:attr fg="green">centered</d:attr> demo</w:fText>
@@ -95,7 +92,6 @@
     </w:vBox>
   </interface>
 
-  <!-- checkBox.dtd -->
   <interface name="checkbox">
     <w:vBox>
       <w:fText><d:attr fg="green">checkBox</d:attr> demo</w:fText>
@@ -125,7 +121,6 @@
     </focusGroup>
   </interface>
 
-  <!-- dialog.dtd -->
   <interface name="dialog">
     <w:vBox>
       <w:fText><d:attr fg="green">dialog</d:attr> demo</w:fText>
@@ -143,7 +138,6 @@
     </focusGroup>
   </interface>
 
-  <!-- dirBrowser.dtd -->
   <interface name="dirbrowser">
     <w:vBox>
       <w:fText><d:attr fg="green">dirBrowser</d:attr> demo</w:fText>
@@ -160,7 +154,6 @@
     </focusGroup>
   </interface>
 
-  <!-- edit.dtd -->
   <interface name="edit">
     <w:vBox>
       <w:fText><d:attr fg="green">edit</d:attr> demo</w:fText>
@@ -179,7 +172,6 @@
     </focusGroup>
   </interface>
 
-  <!-- fText.dtd -->
   <interface name="fText">
     <w:vBox>
       <w:fText><d:attr fg="green">fText</d:attr> demo</w:fText>
@@ -203,8 +195,6 @@
     </w:vBox>
   </interface>
 
-  <!-- hBox-sized.dtd -->
-  <!-- hBox.dtd -->
   <interface name="hbox">
     <w:vBox>
       <w:fText><d:attr fg="green">hBox</d:attr> / <d:attr fg="green">hBox-sized</d:attr> demo</w:fText>
@@ -262,8 +252,6 @@
     </w:vBox>
   </interface>
 
-  <!-- hFill.dtd -->
-  <!-- vFill.dtd -->
   <interface name="fills">
     <w:vBox>
       <w:fText><d:attr fg="green">hFill</d:attr> / <d:attr fg="green">vFill</d:attr> demo</w:fText>
@@ -283,9 +271,6 @@
     </w:vBox>
   </interface>
 
-  <!-- vLimit.dtd -->
-  <!-- hLimit.dtd -->
-  <!-- boxLimit.dtd -->
   <interface name="limits">
     <w:vBox>
       <w:fText><d:attr fg="green">hLimit</d:attr> / <d:attr fg="green">vLimit</d:attr> demo</w:fText>
@@ -345,9 +330,6 @@
     </w:vBox>
   </interface>
 
-  <!-- vFixed.dtd -->
-  <!-- hFixed.dtd -->
-  <!-- boxFixed.dtd -->
   <interface name="fixed">
     <w:vBox>
       <w:fText><d:attr fg="green">hFixed</d:attr> / <d:attr fg="green">vFixed</d:attr> demo</w:fText>
@@ -400,7 +382,6 @@
     </w:vBox>
   </interface>
 
-  <!-- pad.dtd -->
   <interface name="pad">
     <w:vBox>
       <w:fText><d:attr fg="green">pad</d:attr> demo</w:fText>
@@ -456,7 +437,6 @@
     </w:vBox>
   </interface>
 
-  <!-- progressBar.dtd -->
   <interface name="progressbar">
     <w:vBox>
       <w:fText><d:attr fg="green">progressBar</d:attr> demo</w:fText>
@@ -488,7 +468,6 @@
     </w:vBox>
   </interface>
 
-  <!-- ref.dtd -->
   <interface name="ref">
     <w:vBox>
       <w:fText><d:attr fg="green">ref</d:attr> demo</w:fText>
@@ -511,9 +490,6 @@
     </w:vBox>
   </interface>
 
-  <!-- shared.dtd -->
-
-  <!-- stringList.dtd -->
   <interface name="stringlist">
     <w:vBox>
       <w:fText><d:attr fg="green">stringList</d:attr> demo</w:fText>
@@ -552,8 +528,6 @@
     </focusGroup>
   </interface>
 
-  <!-- vBox-sized.dtd -->
-  <!-- vBox.dtd -->
   <interface name="vbox">
     <w:vBox>
       <w:fText><d:attr fg="green">vBox</d:attr> / <d:attr fg="green">vBox-sized</d:attr> demo</w:fText>
