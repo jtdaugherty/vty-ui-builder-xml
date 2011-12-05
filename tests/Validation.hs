@@ -16,7 +16,6 @@ import Test.HUnit hiding (Test)
 
 import Graphics.Vty.Widgets.Builder
 import Graphics.Vty.Widgets.Builder.AST ( srcFile )
-import Graphics.Vty.Widgets.Builder.Config
 import Graphics.Vty.Widgets.Builder.Types
 import Graphics.Vty.Widgets.Builder.Handlers
 import Graphics.Vty.Widgets.Builder.Reader
@@ -112,10 +111,9 @@ runValidationTest tc = do
                                  ]
     (Right doc, Failure es) ->
         do
-          result <- generateSourceForDocument defaultConfig doc coreSpecHandlers
-          case result of
-            Left generationErrors ->
-                do let actualMsgs = map (\(Error loc msg) -> show (loc { srcFile = "-"}) ++ ": " ++ msg) generationErrors
+          case validateDocument doc coreSpecHandlers of
+            validationErrors@(_:_) ->
+                do let actualMsgs = map (\(Error loc msg) -> show (loc { srcFile = "-"}) ++ ": " ++ msg) validationErrors
                    when (not $ es == actualMsgs) $
                         assertFailure $ concat [ "Error: validation failed as expected, but with the wrong specifics.\n"
                                                , "Expected:\n"
@@ -123,9 +121,9 @@ runValidationTest tc = do
                                                , "\nActual:\n"
                                                , intercalate "\n" actualMsgs
                                                ]
-            Right _ -> assertFailure $ concat [ "validation succeeded but should have failed with the following errors:\n"
-                                              , intercalate "\n" es
-                                              ]
+            [] -> assertFailure $ concat [ "validation succeeded but should have failed with the following errors:\n"
+                                         , intercalate "\n" es
+                                         ]
     (Left actualEs, Failure expectedEs) ->
         do
           let actualMsgs = map (\(msg, loc) -> show (loc { srcFile = "-"}) ++ ": " ++ msg) actualEs
@@ -138,14 +136,13 @@ runValidationTest tc = do
                                       ]
     (Right doc, Success) ->
         do
-          result <- generateSourceForDocument defaultConfig doc coreSpecHandlers
-          case result of
-            Left generationErrors ->
-                do let actualMsgs = map (\(Error loc msg) -> show (loc { srcFile = "-"}) ++ ": " ++ msg) generationErrors
+          case validateDocument doc coreSpecHandlers of
+            validationErrors@(_:_) ->
+                do let actualMsgs = map (\(Error loc msg) -> show (loc { srcFile = "-"}) ++ ": " ++ msg) validationErrors
                    assertFailure $ concat [ "Error: validation should have succeeded but failed.\n"
                                           , intercalate "\n" actualMsgs
                                           ]
-            Right _ -> return ()
+            [] -> return ()
 
 getValidationTests :: IO Test
 getValidationTests = do

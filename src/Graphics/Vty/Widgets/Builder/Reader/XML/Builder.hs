@@ -82,7 +82,7 @@ parseInterfaces =
 
           parseFocusEntry =
               expect coreNS "entry" $
-                         \e -> (,)
+                         \e -> A.FocusReference
                                <$> reqAttr e "name"
                                <*> (pure $ toSourceLocation $ info e)
 
@@ -158,13 +158,34 @@ parseElement c =
     ParseError "Expected element, got non-element content" (info c)
 
 parseWidgetLike :: Content Posn -> XMLParse A.WidgetLike
-parseWidgetLike e = (A.Ref <$> parseReference e) <|>
+parseWidgetLike e = (A.WidgetRef <$> parseWidgetReference e) <|>
+                    (A.WidgetRef <$> parseParamReference e) <|>
+                    (A.WidgetRef <$> parseSharedReference e) <|>
                     (A.Widget <$> parseWidgetElement e)
 
-parseReference :: Content Posn -> XMLParse A.Reference
-parseReference =
-    expect coreNS "ref" $ \r ->
-        A.Reference <$> reqAttr r "target" <*> (pure $ toSourceLocation $ info r)
+parseWidgetReference :: Content Posn -> XMLParse A.WidgetReference
+parseWidgetReference =
+    expect coreNS "wref" $ \r ->
+        A.WidgetReference
+             <$> reqAttr r "target"
+             <*> (pure $ toSourceLocation $ info r)
+             <*> (pure A.InterfaceWidgetRef)
+
+parseParamReference :: Content Posn -> XMLParse A.WidgetReference
+parseParamReference =
+    expect coreNS "pref" $ \r ->
+        A.WidgetReference
+             <$> reqAttr r "target"
+             <*> (pure $ toSourceLocation $ info r)
+             <*> (pure A.ParameterRef)
+
+parseSharedReference :: Content Posn -> XMLParse A.WidgetReference
+parseSharedReference =
+    expect coreNS "shref" $ \r ->
+        A.WidgetReference
+             <$> reqAttr r "target"
+             <*> (pure $ toSourceLocation $ info r)
+             <*> (pure A.SharedWidgetRef)
 
 elemName :: Content Posn -> String
 elemName (CElem (Elem nam _ _) _) = printableName nam

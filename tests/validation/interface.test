@@ -32,20 +32,6 @@ Interface
     </focusGroup>
   </interface>
 
-  <interface name="i4">
-    <collection>
-      <interface name="i5">
-        <w:checkBox id="t"/>
-        <focusGroup>
-          <entry name="t"/>
-        </focusGroup>
-      </interface>
-    </collection>
-    <focusGroup>
-      <entry name="t"/>
-    </focusGroup>
-  </interface>
-
   <interface name="i6">
     <w:edit/>
     <focusGroup>
@@ -56,5 +42,4 @@ Interface
 ---
 # TODO: -:7:5: unknown widget type "invalid"
 # TODO: -:26:3: "interface" element requires "name" attribute
--:34:5: Expected element in namespace "http://codevine.org/vty-ui-builder/xmlns/widget/1.0", got element in namespace "http://codevine.org/vty-ui-builder/xmlns/core/1.0"
-# TODO: -:9:7: Focus group error: widget name "nonexistent" not found in interface "i"
+-:36:7: Focus group entry "nonexistent" not referenced or defined in interface i6

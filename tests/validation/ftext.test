@@ -12,10 +12,11 @@ fText
 
   <interface name="i">
     <w:vBox>
+      <w:fText id="foobar"/>
       <w:fText><w:hBorder/></w:fText>
       <w:fText><d:attr><w:hBorder/></d:attr></w:fText>
       <w:fText><d:stuff/></w:fText>
-      <w:fText><ref target="foobar"/></w:fText>
+      <w:fText><wref target="foobar"/></w:fText>
     </w:vBox>
     <focusGroup/>
   </interface>
@@ -45,8 +46,8 @@ fText
   </interface>
 </collection>
 ---
--:13:7: got unsupported child of fText: widget-like
--:14:7: got unsupported child of attr: widget-like
--:15:7: got unsupported child of fText: stuff
--:16:7: got unsupported child of fText: widget-like
--:39:22: Color "invalid" invalid, must be one of ["red","green","yellow","blue","magenta","cyan","white","black","bright_red","bright_green","bright_yellow","bright_black","bright_magenta","bright_cyan","bright_white","bright_blue"]
+-:14:7: got unsupported child of fText: widget-like
+-:15:7: got unsupported child of attr: widget-like
+-:16:7: got unsupported child of fText: stuff
+-:17:7: got unsupported child of fText: widget-like
+-:40:22: Color "invalid" invalid, must be one of ["red","green","yellow","blue","magenta","cyan","white","black","bright_red","bright_green","bright_yellow","bright_black","bright_magenta","bright_cyan","bright_white","bright_blue"]

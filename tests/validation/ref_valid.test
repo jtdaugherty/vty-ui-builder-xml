@@ -5,14 +5,37 @@ Valid reference
             xmlns:d="http://codevine.org/vty-ui-builder/xmlns/data/1.0"
             xmlns:w="http://codevine.org/vty-ui-builder/xmlns/widget/1.0"
             xmlns="http://codevine.org/vty-ui-builder/xmlns/core/1.0">
-  <interface name="i2">
+  <params>
+    <param name="p" type="Foo"/>
+  </params>
+
+  <shared>
+    <w:fText id="sharedText"/>
+  </shared>
+
+  <interface name="i">
     <w:vBox>
       <w:fText id="t1">Stuff</w:fText>
-      <ref target="t1"/>
+      <wref target="t1"/>
     </w:vBox>
     <focusGroup>
     </focusGroup>
   </interface>
+
+  <interface name="i2">
+    <shref target="sharedText"/>
+    <focusGroup>
+      <entry name="sharedText"/>
+    </focusGroup>
+  </interface>
+
+  <interface name="i3">
+    <pref target="p"/>
+    <focusGroup>
+      <entry name="p"/>
+    </focusGroup>
+  </interface>
+
 </collection>
 ---
 success
