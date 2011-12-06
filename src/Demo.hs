@@ -1,5 +1,4 @@
-{-# LANGUAGE QuasiQuotes, TemplateHaskell #-}
--- {-# OPTIONS_GHC -ddump-splices #-}
+{-# LANGUAGE QuasiQuotes #-}
 module Main where
 
 import System.Exit
