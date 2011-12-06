@@ -1,6 +1,6 @@
 module Graphics.Vty.Widgets.Builder.Reader.XML
     ( xmlReader
-    , xmlUi
+    , module Graphics.Vty.Widgets.Builder.Reader.XML.TH
     )
 where
 

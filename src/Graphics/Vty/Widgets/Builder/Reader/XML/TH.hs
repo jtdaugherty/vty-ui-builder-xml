@@ -1,4 +1,8 @@
-module Graphics.Vty.Widgets.Builder.Reader.XML.TH where
+module Graphics.Vty.Widgets.Builder.Reader.XML.TH
+    ( xmlUi
+    , xmlUiFile
+    )
+where
 
 import Control.Monad
 
@@ -30,6 +34,9 @@ xmlUi =
                 , quoteType = const $ fail typeMsg
                 , quoteDec = doQuoteDec
                 }
+
+xmlUiFile :: QuasiQuoter
+xmlUiFile = quoteFile xmlUi
 
 doQuoteDec :: String -> Q [Dec]
 doQuoteDec src = do
