@@ -6,13 +6,24 @@ pad element with invalid attribute
             xmlns:w="http://codevine.org/vty-ui-builder/xmlns/widget/1.0"
             xmlns="http://codevine.org/vty-ui-builder/xmlns/core/1.0">
   <interface name="i">
-    <w:pad top="foo">
-      <w:fText id="t">stuff</w:fText>
-    </w:pad>
+    <w:vBox>
+      <w:pad padTop="foo"><w:fText>stuff</w:fText></w:pad>
+      <w:pad padBottom="foo"><w:fText>stuff</w:fText></w:pad>
+      <w:pad padTopBottom="foo"><w:fText>stuff</w:fText></w:pad>
+      <w:pad padLeft="foo"><w:fText>stuff</w:fText></w:pad>
+      <w:pad padRight="foo"><w:fText>stuff</w:fText></w:pad>
+      <w:pad padLeftRight="foo"><w:fText>stuff</w:fText></w:pad>
+      <w:pad padAll="foo"><w:fText>stuff</w:fText></w:pad>
+    </w:vBox>
     <focusGroup>
-      <entry name="t"/>
     </focusGroup>
   </interface>
 </collection>
 ---
--:7:5: Attribute "top" value must be an integer
+-:8:7: Attribute "padTop" value must be an integer
+-:9:7: Attribute "padBottom" value must be an integer
+-:10:7: Attribute "padTopBottom" value must be an integer
+-:11:7: Attribute "padLeft" value must be an integer
+-:12:7: Attribute "padRight" value must be an integer
+-:13:7: Attribute "padLeftRight" value must be an integer
+-:14:7: Attribute "padAll" value must be an integer

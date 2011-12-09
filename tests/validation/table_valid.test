@@ -6,16 +6,63 @@ Valid tables
             xmlns:w="http://codevine.org/vty-ui-builder/xmlns/widget/1.0"
             xmlns="http://codevine.org/vty-ui-builder/xmlns/core/1.0">
   <interface name="i">
-    <w:table>
-      <d:columns>
-        <d:column size="auto"/>
-      </d:columns>
-      <d:row>
-        <d:cell>
-          <w:edit/>
-        </d:cell>
-      </d:row>
-    </w:table>
+    <w:vBox>
+      <w:table>
+        <d:columns>
+          <d:column size="auto"/>
+          <d:column size="auto"/>
+          <d:column size="auto"/>
+          <d:column size="auto"/>
+        </d:columns>
+        <d:row>
+          <d:cell>
+            <w:edit/>
+          </d:cell>
+          <d:cell align="left">
+            <w:edit/>
+          </d:cell>
+          <d:cell align="right">
+            <w:edit/>
+          </d:cell>
+          <d:cell align="center">
+            <w:edit/>
+          </d:cell>
+        </d:row>
+      </w:table>
+
+      <w:table>
+        <d:columns>
+          <d:column align="left" size="auto"/>
+          <d:column align="right" size="auto"/>
+          <d:column align="center" size="auto"/>
+        </d:columns>
+        <d:row>
+          <d:cell align="left">
+            <w:edit/>
+          </d:cell>
+          <d:cell align="right">
+            <w:edit/>
+          </d:cell>
+          <d:cell align="center">
+            <w:edit/>
+          </d:cell>
+        </d:row>
+      </w:table>
+
+      <w:table>
+        <d:columns>
+          <d:column size="auto"/>
+        </d:columns>
+        <d:row><d:cell padTop="1"><w:edit/></d:cell></d:row>
+        <d:row><d:cell padBottom="1"><w:edit/></d:cell></d:row>
+        <d:row><d:cell padLeft="1"><w:edit/></d:cell></d:row>
+        <d:row><d:cell padRight="1"><w:edit/></d:cell></d:row>
+        <d:row><d:cell padTopBottom="1"><w:edit/></d:cell></d:row>
+        <d:row><d:cell padLeftRight="1"><w:edit/></d:cell></d:row>
+        <d:row><d:cell padAll="1"><w:edit/></d:cell></d:row>
+        <d:row><d:cell><w:edit/></d:cell></d:row>
+      </w:table>
+    </w:vBox>
     <focusGroup/>
   </interface>
 </collection>

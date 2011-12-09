@@ -395,39 +395,39 @@
       <w:hBox>
         <w:vBox>
           <w:bordered>
-            <w:pad left="2">
+            <w:pad padLeft="2">
               <w:fText>Padded on <d:attr fg="cyan">left</d:attr></w:fText>
             </w:pad>
           </w:bordered>
           <w:bordered>
-            <w:pad right="2">
+            <w:pad padRight="2">
               <w:fText>Padded on <d:attr fg="cyan">right</d:attr></w:fText>
             </w:pad>
           </w:bordered>
           <w:bordered>
-            <w:pad top="2">
+            <w:pad padTop="2">
               <w:fText>Padded on <d:attr fg="cyan">top</d:attr></w:fText>
             </w:pad>
           </w:bordered>
           <w:bordered>
-            <w:pad bottom="2">
+            <w:pad padBottom="2">
               <w:fText>Padded on <d:attr fg="cyan">bottom</d:attr></w:fText>
             </w:pad>
           </w:bordered>
         </w:vBox>
         <w:vBox>
           <w:bordered>
-            <w:pad topBottom="2">
+            <w:pad padTopBottom="2">
               <w:fText>Padded on top and bottom (<d:attr fg="cyan">topBottom</d:attr>)</w:fText>
             </w:pad>
           </w:bordered>
           <w:bordered>
-            <w:pad leftRight="2">
+            <w:pad padLeftRight="2">
               <w:fText>Padded on left and right (<d:attr fg="cyan">leftRight</d:attr>)</w:fText>
             </w:pad>
           </w:bordered>
           <w:bordered>
-            <w:pad all="2">
+            <w:pad padAll="2">
               <w:fText>Padded on <d:attr fg="cyan">all</d:attr> sides</w:fText>
             </w:pad>
           </w:bordered>
@@ -702,6 +702,75 @@
             </d:cell>
             <d:cell>
               <w:fText>Column and row borders only</w:fText>
+            </d:cell>
+          </d:row>
+        </w:table>
+
+        <w:table borderStyle="full">
+          <d:columns>
+            <d:column size="30"/>
+            <d:column size="30"/>
+          </d:columns>
+          <d:row>
+            <d:cell padLeft="5">
+              <w:fText>Left padding</w:fText>
+            </d:cell>
+            <d:cell>
+              <w:fText>No padding</w:fText>
+            </d:cell>
+          </d:row>
+          <d:row>
+            <d:cell>
+              <w:fText>No padding</w:fText>
+            </d:cell>
+            <d:cell padBottom="1">
+              <w:fText>Bottom padding</w:fText>
+            </d:cell>
+          </d:row>
+        </w:table>
+
+        <w:table borderStyle="full">
+          <d:columns>
+            <d:column size="30"/>
+            <d:column size="30"/>
+          </d:columns>
+          <d:row>
+            <d:cell align="center">
+              <w:fText>Centered</w:fText>
+            </d:cell>
+            <d:cell>
+              <w:fText>Left-aligned</w:fText>
+            </d:cell>
+          </d:row>
+          <d:row>
+            <d:cell align="right">
+              <w:fText>Right-aligned</w:fText>
+            </d:cell>
+            <d:cell>
+              <w:fText>Left-aligned</w:fText>
+            </d:cell>
+          </d:row>
+        </w:table>
+
+        <w:table borderStyle="full">
+          <d:columns>
+            <d:column size="30" align="center"/>
+            <d:column size="30"/>
+          </d:columns>
+          <d:row>
+            <d:cell>
+              <w:fText>All centered</w:fText>
+            </d:cell>
+            <d:cell>
+              <w:fText>Left-aligned</w:fText>
+            </d:cell>
+          </d:row>
+          <d:row>
+            <d:cell align="right">
+              <w:fText>Right-aligned (overriden)</w:fText>
+            </d:cell>
+            <d:cell>
+              <w:fText>Left-aligned</w:fText>
             </d:cell>
           </d:row>
         </w:table>

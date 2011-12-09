@@ -101,6 +101,72 @@ Invalid tables
     </w:table>
     <focusGroup/>
   </interface>
+
+  <interface name="i2">
+    <w:table>
+      <d:columns>
+        <d:column size="auto" align="bogus"/>
+      </d:columns>
+      <d:row><d:cell><w:edit/></d:cell></d:row>
+    </w:table>
+    <focusGroup/>
+  </interface>
+
+  <interface name="i2">
+    <w:table>
+      <d:columns><d:column size="auto"/></d:columns>
+      <d:row><d:cell padTop="bogus"><w:edit/></d:cell></d:row>
+    </w:table>
+    <focusGroup/>
+  </interface>
+
+  <interface name="i2">
+    <w:table>
+      <d:columns><d:column size="auto"/></d:columns>
+      <d:row><d:cell padBottom="bogus"><w:edit/></d:cell></d:row>
+    </w:table>
+    <focusGroup/>
+  </interface>
+
+  <interface name="i2">
+    <w:table>
+      <d:columns><d:column size="auto"/></d:columns>
+      <d:row><d:cell padTopBottom="bogus"><w:edit/></d:cell></d:row>
+    </w:table>
+    <focusGroup/>
+  </interface>
+
+  <interface name="i2">
+    <w:table>
+      <d:columns><d:column size="auto"/></d:columns>
+      <d:row><d:cell padLeft="bogus"><w:edit/></d:cell></d:row>
+    </w:table>
+    <focusGroup/>
+  </interface>
+
+  <interface name="i2">
+    <w:table>
+      <d:columns><d:column size="auto"/></d:columns>
+      <d:row><d:cell padRight="bogus"><w:edit/></d:cell></d:row>
+    </w:table>
+    <focusGroup/>
+  </interface>
+
+  <interface name="i2">
+    <w:table>
+      <d:columns><d:column size="auto"/></d:columns>
+      <d:row><d:cell padLeftRight="bogus"><w:edit/></d:cell></d:row>
+    </w:table>
+    <focusGroup/>
+  </interface>
+
+  <interface name="i2">
+    <w:table>
+      <d:columns><d:column size="auto"/></d:columns>
+      <d:row><d:cell padAll="bogus"><w:edit/></d:cell></d:row>
+    </w:table>
+    <focusGroup/>
+  </interface>
 </collection>
 ---
 -:7:5: all rows must have the same number of cells
@@ -110,3 +176,11 @@ Invalid tables
 -:65:5: number of column specifications must match the number of columns (1)
 -:80:5: table must have at least one column specification
 -:93:5: all rows must contain at least one cell
+-:106:9: 'align' attribute must be one of "left", "center", "right"
+-:116:14: Attribute "padTop" value must be an integer
+-:124:14: Attribute "padBottom" value must be an integer
+-:132:14: Attribute "padTopBottom" value must be an integer
+-:140:14: Attribute "padLeft" value must be an integer
+-:148:14: Attribute "padRight" value must be an integer
+-:156:14: Attribute "padLeftRight" value must be an integer
+-:164:14: Attribute "padAll" value must be an integer
